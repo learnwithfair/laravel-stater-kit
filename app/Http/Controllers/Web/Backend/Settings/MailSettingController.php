@@ -18,7 +18,7 @@ class MailSettingController extends Controller {
      */
     public function index() {
         if (User::find(auth()->user()->id)) {
-            return view('backend.layouts.settings.mail_settings');
+            return view('backend.settings.mail_settings');
         }
         return redirect()->back();
     }

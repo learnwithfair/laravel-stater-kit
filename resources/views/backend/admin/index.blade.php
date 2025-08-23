@@ -7,17 +7,17 @@
 
         <div class="row justify-content-center">
             <div class="col-12">
-                <div class="dashboard_header mb_50">
+                <div class="dashboard_header mb_25">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="dashboard_header_title">
-                                <h3> Admin Info</h3>
+                                <h3> Users Info</h3>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="dashboard_breadcam text-end">
                                 <p><a href="{{ route('admin.dashboard') }}">Dashboard</a> <i class="fas fa-caret-right"></i> <a
-                                        href="{{ route('users.index') }}"> Admin list</a></p>
+                                        href="{{ route('users.index') }}"> Users list</a></p>
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title d-inline-block text-info">User Details</h4>
-                        <p class="card-description" style="float: right">Customize admin status </p>
+                        <p class="card-description" style="float: right">Customize User status </p>
                         <hr />
                         <div class="table-responsive w-100">
                             <table class="table reloadAdminTable table-hover" id="dataTable">

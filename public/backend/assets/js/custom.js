@@ -241,32 +241,32 @@ $("#sidebar_menu >li a").filter(function() {
     });
 
     // sumer note
-    var summerNote = $('#summernote');
-    if(summerNote.length){
-        summerNote.summernote({
-            placeholder: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-            tabsize: 2,
-            height: 305
-        });
-    }
-    // sumer note
-    var summerNote = $('.lms_summernote');
-    if(summerNote.length){
-        summerNote.summernote({
-            placeholder: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-            tabsize: 2,
-            height: 305
-        });
-    }
-    // sumer note
-    var summerNote = $('.lms_summernote');
-    if(summerNote.length){
-        summerNote.summernote({
-            placeholder: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-            tabsize: 2,
-            height: 305
-        });
-    }
+    // var summerNote = $('#summernote');
+    // if(summerNote.length){
+    //     summerNote.summernote({
+    //         placeholder: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    //         tabsize: 2,
+    //         height: 305
+    //     });
+    // }
+    // // sumer note
+    // var summerNote = $('.lms_summernote');
+    // if(summerNote.length){
+    //     summerNote.summernote({
+    //         placeholder: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    //         tabsize: 2,
+    //         height: 305
+    //     });
+    // }
+    // // sumer note
+    // var summerNote = $('.lms_summernote');
+    // if(summerNote.length){
+    //     summerNote.summernote({
+    //         placeholder: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    //         tabsize: 2,
+    //         height: 305
+    //     });
+    // }
     
     
     //custom file

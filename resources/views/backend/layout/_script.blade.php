@@ -8,6 +8,8 @@
 <script src="{{ asset('backend/assets/js/popper1.min.js') }}"></script>
 <!-- bootstarp js -->
 <script src="{{ asset('backend/assets/js/bootstrap1.min.js') }}"></script>
+
+
 <!-- sidebar menu  -->
 <script src="{{ asset('backend/assets/js/metisMenu.js') }}"></script>
 <!-- waypoints js -->
@@ -74,6 +76,8 @@
 <script src="{{ asset('assets/password-toggle.js') }}"></script>
 
 
+
+
 <!-- Start  js for Bootsrap -->
 {{-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
@@ -105,3 +109,36 @@
     });
 </script>
 <!-- End  js for datatable -->
+
+
+<script src="{{ asset('backend/assets/js/dropify.min.js')}}"></script>
+<script src="{{ asset('backend/assets/js/summernote.js')}}"></script>
+
+
+{{-- dropify start --}}
+<script>
+    $(document).ready(function() {
+        $('.dropify').dropify();
+    });
+</script>
+{{-- dropify end --}}
+
+
+{{-- summernote start --}}
+<script>
+    $('#summernote').summernote({
+        placeholder: 'Enter your content here...',
+        tabsize: 2,
+        height: 200,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+    });
+</script>
+{{-- summernote end --}}

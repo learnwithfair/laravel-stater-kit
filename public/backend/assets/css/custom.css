@@ -154,3 +154,13 @@ td {
 .table-hover > tbody > tr:hover a {
     font-weight: bold !important;
 }
+
+
+
+.menu-title{
+    color: white;
+    padding-left: 10px;
+    text-transform: capitalize;
+   margin-top: 15px;
+   margin-bottom: 5px;
+}

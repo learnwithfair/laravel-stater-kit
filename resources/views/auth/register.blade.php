@@ -6,12 +6,12 @@
 <x-guest-layout>
     <div class="main_content_iner d-flex justify-content-center align-items-center"
         style="min-height: 100vh; overflow-x: hidden;">
-        <div class="container-fluid p-0">
+        <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
-                    <div class="white_box mb_30">
+                    <div class="mb_30">
                         <div class="row justify-content-center">
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <!-- Register -->
                                 <div class="modal-content cs_modal">
                                     <div class="modal-header theme_bg_1 justify-content-center">

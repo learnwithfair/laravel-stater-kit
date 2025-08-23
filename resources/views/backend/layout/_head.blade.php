@@ -65,6 +65,11 @@
 <link rel="stylesheet" href="{{ asset('backend/assets/css/metisMenu.css') }}">
 <!-- style CSS -->
 <link rel="stylesheet" href="{{ asset('backend/assets/css/style1.css') }}">
+<link rel="stylesheet" href="{{ asset('backend/assets/css/dropify.min.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
+
+
 <link rel="stylesheet" href="{{ asset('backend/assets/css/colors/default.css') }}" id="colorSkinCSS">
 
 {{-- Font ajax --}}
@@ -78,3 +83,24 @@
 
 
 <link rel="stylesheet" href="{{ asset('backend/assets/css/custom.css') }}">
+
+
+{{-- dropify and ck-editor start --}}
+<style>
+    .ck-editor__editable[role="textbox"] {
+        min-height: 150px;
+    }
+
+    .dropify-wrapper .dropify-render {
+        display: unset !important;
+    }
+</style>
+{{-- dropify and ck-editor end --}}
+
+{{--  --}}
+<style>
+    .note-modal-backdrop {
+        z-index: 0 !important;
+    }
+</style>
+{{-- dropify and ck-editor end --}}

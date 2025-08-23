@@ -2000,7 +2000,7 @@ p a:hover {
 
 /* line 1514, G:/admin_project/10 admin/cryptocurrency/scss/_reset.scss */
 .dashboard_header .dashboard_header_title h3 {
-  font-size: 33px;
+  font-size: 24px;
   font-weight: 600;
   color: #2E4765;
   margin-bottom: 7px;
@@ -9122,7 +9122,8 @@ canvas#highlights {
 
 /* line 199, G:/admin_project/10 admin/cryptocurrency/scss/_byer_table.scss */
 .theme_bg_1 {
-  background: #A37BFD !important;
+  /* background: #A37BFD !important; */
+  background: #373063 !important;
 }
 
 /* line 202, G:/admin_project/10 admin/cryptocurrency/scss/_byer_table.scss */

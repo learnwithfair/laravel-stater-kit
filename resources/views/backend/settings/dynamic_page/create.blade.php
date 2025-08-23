@@ -1,75 +1,77 @@
-@extends('backend.app')
-@section('title', 'Dynamic Pages')
-@section('page-content')
-<!--begin::Toolbar-->
-<div class="toolbar" id="kt_toolbar">
-    <div class="flex-wrap container-fluid d-flex flex-stack flex-sm-nowrap">
-        <!--begin::Info-->
-        <div class="flex-wrap d-flex flex-column align-items-start justify-content-center me-2">
-            <!--begin::Title-->
-            <h1 class="text-dark fw-bold fs-2">
-                @yield('title' ?? "Dashboard") <small class="text-muted fs-6 fw-normal ms-1"></small>
-            </h1>
-            <!--end::Title-->
+@extends('backend.layout.master')
+@section('title')
+    || Dynamic Pages
+@endsection
 
-            <!--begin::Breadcrumb-->
-            <ul class="breadcrumb fw-semibold fs-base" style="padding: 0 0 0 5px;">
-                <li class="breadcrumb-item text-muted">
-                    <a href="{{ route('admin.dashboard') }}" class="text-muted text-hover-primary">
-                        Home </a>
-                </li>
-
-                <li class="breadcrumb-item text-muted">
-                    @yield('title' ?? "Dashboard") </li>
-
-            </ul>
-            <!--end::Breadcrumb-->
+@section('content')
+    <div class="content-wrapper">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="dashboard_header mb_25">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="dashboard_header_title">
+                                <h3> Create Dynamic Pages</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="dashboard_breadcam text-end">
+                                <p><a href="{{ route('admin.dashboard') }}">Dashboard</a> <i class="fas fa-caret-right"></i>
+                                    <a href="{{ route('dynamic_page.index') }}"> Dynamic Pages</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!--end::Info-->
-    </div>
-</div>
-<!--end::Toolbar-->
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="mb-4 card-style">
-                <div class="card card-body">
-                    <form method="POST" action="{{ route('dynamic_page.store') }}">
-                        @csrf
-                        <div class="mt-4 mt-md-0 input-style-1">
-                            <label for="page_title">Title:</label>
-                            <input type="text" placeholder="Enter Title" id="page_title"
-                                class="form-control @error('page_title') is-invalid @enderror" name="page_title"
-                                value="{{ old('page_title') }}" />
-                            @error('page_title')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="mb-4 card-style">
+                        <div class="card card-body">
+                            <form method="POST" action="{{ route('dynamic_page.store') }}">
+                                @csrf
+                                <div class="mt-4 mt-md-0 input-style-1">
+                                    <label for="page_title">Title:</label>
+                                    <input type="text" placeholder="Enter Title" id="page_title"
+                                        class="form-control @error('page_title') is-invalid @enderror" name="page_title"
+                                        value="{{ old('page_title') }}" />
+                                    @error('page_title')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
 
-                        <div class="mt-4 input-style-1">
-                            <label for="page_content">Content:</label>
-                            <textarea placeholder="Type here..." id="summernote" name="page_content"
-                                class="form-control @error('page_content') is-invalid @enderror">
-                                    {{ old('page_content') }}
-                                </textarea>
-                            @error('page_content')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
+                                <div class="mt-4 input-style-1">
+                                    <label for="page_content">Content:</label>
+                                    <textarea placeholder="Type here..." id="summernote" name="page_content"
+                                        class="form-control @error('page_content') is-invalid @enderror">
+                                            {{ old('page_content') }}
+                                        </textarea>
+                                    @error('page_content')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
 
-                        <div class="mt-4 col-12">
-                            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-                            <a href="{{ route('dynamic_page.index') }}" class="btn btn-danger btn-lg me-2">Cancel</a>
+                                <div class="row">
+                                    <div class="mt-3 col-12 ">
+                                        <div class="d-flex justify-content-end ">
+                                            <a href="{{ route('dynamic_page.index') }}"
+                                                class="btn btn-danger btn-md me-3">Cancel</a>
+                                            <button type="submit" class="btn btn-primary btn-md ">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

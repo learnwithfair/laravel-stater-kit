@@ -13,5 +13,5 @@ export default defineConfig({
         outDir: 'public/build',
         manifest: true,
     },
-    base: '/peopleplus/', // Ensure this matches your subdomain path
+    base: '/laravel-stater-kit/', // Ensure this matches your subdomain path
 });

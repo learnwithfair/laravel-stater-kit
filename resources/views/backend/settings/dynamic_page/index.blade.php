@@ -1,72 +1,71 @@
-@extends('backend.app')
-@section('title', 'Dynamic Pages')
-@section('page-content')
-<!--begin::Toolbar-->
-<div class="toolbar" id="kt_toolbar">
-    <div class="flex-wrap container-fluid d-flex flex-stack flex-sm-nowrap">
-        <!--begin::Info-->
-        <div class="flex-wrap d-flex flex-column align-items-start justify-content-center me-2">
-            <!--begin::Title-->
-            <h1 class="text-dark fw-bold fs-2">
-                @yield('title' ?? "Dashboard") <small class="text-muted fs-6 fw-normal ms-1"></small>
-            </h1>
-            <!--end::Title-->
+@extends('backend.layout.master')
+@section('title')
+    || Dynamic Pages
+@endsection
 
-            <!--begin::Breadcrumb-->
-            <ul class="breadcrumb fw-semibold fs-base" style="padding: 0 0 0 5px;">
-                <li class="breadcrumb-item text-muted">
-                    <a href="{{ route('admin.dashboard') }}" class="text-muted text-hover-primary">
-                        Home </a>
-                </li>
-
-                <li class="breadcrumb-item text-muted">
-                    @yield('title' ?? "Dashboard") </li>
-
-            </ul>
-            <!--end::Breadcrumb-->
-        </div>
-        <!--end::Info-->
-    </div>
-</div>
-<!--end::Toolbar-->
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="p-3 card">
-                <div class="card-style mb-30">
-                    <div class="mb-4 d-flex justify-content-start">
-                        <a href="{{ route('dynamic_page.create') }}" class="btn btn-primary btn-lg">Add New
-                            Page</a>
+@section('content')
+    <div class="content-wrapper">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="dashboard_header mb_25">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="dashboard_header_title">
+                                <h3> Dynamic Pages Info</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="dashboard_breadcam text-end">
+                                <p><a href="{{ route('admin.dashboard') }}">Dashboard</a> <i class="fas fa-caret-right"></i>
+                                    <a href="{{ route('dynamic_page.index') }}"> Dynamic Pages</a>
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="table-wrapper table-responsive">
-                        <table id="data-table" class="table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Page Title</th>
-                                    <th>Page Content</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {{-- Dynamic Data --}}
-                            </tbody>
-                        </table>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="p-3 card">
+                        <div class="card-style mb-30">
+                            <div class="mb-4 d-flex justify-content-start">
+                                <a href="{{ route('dynamic_page.create') }}" class="btn btn-primary btn-md">Add New
+                                    Page</a>
+                            </div>
+                            <div class="table-wrapper table-responsive">
+                                <table id="data-table" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Page Title</th>
+                                            <th>Page Content</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{-- Dynamic Data --}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 
 
 @push('script')
-<script>
-    $(document).ready(function() {
+    <script>
+        $(document).ready(function () {
             $.ajaxSetup({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -82,14 +81,14 @@
                     processing: true,
                     responsive: true,
                     serverSide: true,
-                    searching: false,
+                    searching: true,
                     paging: false,
                     language: {
                         processing: `<div class="text-center">
-                            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                          </div>
-                            </div>`
+                                <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                              </div>
+                                </div>`
                     },
 
                     scroller: {
@@ -103,35 +102,35 @@
                     },
 
                     columns: [{
-                            data: 'DT_RowIndex',
-                            name: 'DT_RowIndex',
-                            orderable: false,
-                            searchable: false
-                        },
-                        {
-                            data: 'page_title',
-                            name: 'page_title',
-                            orderable: true,
-                            searchable: true
-                        },
-                        {
-                            data: 'page_content',
-                            name: 'page_content',
-                            orderable: true,
-                            searchable: true
-                        },
-                        {
-                            data: 'status',
-                            name: 'status',
-                            orderable: true,
-                            searchable: true
-                        },
-                        {
-                            data: 'action',
-                            name: 'action',
-                            orderable: false,
-                            searchable: false
-                        },
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'page_title',
+                        name: 'page_title',
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: 'page_content',
+                        name: 'page_content',
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
                     ],
                 });
 
@@ -165,7 +164,7 @@
             $.ajax({
                 type: "GET",
                 url: url.replace(':id', id),
-                success: function(resp) {
+                success: function (resp) {
                     console.log(resp);
                     // Reloade DataTable
                     $('#data-table').DataTable().ajax.reload();
@@ -178,7 +177,7 @@
                         toastr.error(resp.message);
                     }
                 },
-                error: function(error) {
+                error: function (error) {
                     // location.reload();
                 }
             });
@@ -211,7 +210,7 @@
                 headers: {
                     'X-CSRF-TOKEN': csrfToken
                 },
-                success: function(resp) {
+                success: function (resp) {
                     console.log(resp);
                     // Reloade DataTable
                     $('#data-table').DataTable().ajax.reload();
@@ -225,10 +224,10 @@
                         toastr.error(resp.message);
                     }
                 },
-                error: function(error) {
+                error: function (error) {
                     // location.reload();
                 }
             })
         }
-</script>
+    </script>
 @endpush

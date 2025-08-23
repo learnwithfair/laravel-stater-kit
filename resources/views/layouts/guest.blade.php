@@ -25,7 +25,7 @@
 
 </head>
 
-<body onload="preloaderFunction()" style="overflow-x: hidden">
+<body onload="preloaderFunction()" style="overflow-x: hidden; background-color: #4285F4;" >
     <!-- Preloader Start -->
     @include('backend.layout.modal._preloader')
     <!-- Preloader End -->

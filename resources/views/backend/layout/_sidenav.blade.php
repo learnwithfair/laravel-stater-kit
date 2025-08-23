@@ -11,17 +11,17 @@
     <div
         class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top reload-logo-area">
         @foreach ($logo as $logo)
-            <a class="sidebar-brand brand-logo" href="{{ route('dashboard') }}"><img
-                    src="{{ asset('uploads/logo/' . $logo->image) }}" alt="logo" /></a>
+        <a class="sidebar-brand brand-logo" href="{{ route('dashboard') }}"><img
+                src="{{ asset('uploads/logo/' . $logo->image) }}" alt="logo" /></a>
         @endforeach
         <a class="sidebar-brand brand-logo-mini" href="{{ route('dashboard') }}">
             @if ($miniLogo)
-                <img class="rounded-circle" src="{{ asset('uploads/logo/' . $miniLogo->image) }}" alt="logo"
-                    style="height: 50px;width:50px;" />
+            <img class="rounded-circle" src="{{ asset('uploads/logo/' . $miniLogo->image) }}" alt="logo"
+                style="height: 50px;width:50px;" />
             @else
-                <img class="rounded-circle"
-                    src="https://ui-avatars.com/api/?name={{ $miniLogoText }}&background=191c24&color=ffffff&rounded=true&size=64&bold=true"
-                    alt="logo" style="height: 50px;width:50px;border:1px solid white;" />
+            <img class="rounded-circle"
+                src="https://ui-avatars.com/api/?name={{ $miniLogoText }}&background=191c24&color=ffffff&rounded=true&size=64&bold=true"
+                alt="logo" style="height: 50px;width:50px;border:1px solid white;" />
             @endif
         </a>
     </div>
@@ -31,28 +31,27 @@
                 <div class="profile-pic">
                     <div class="count-indicator" style="width:35px !important">
                         @php
-                            $profilePhoto = Auth::user()->profile_photo_url;
-                            $Photo = Auth::user()->image;
+                        $profilePhoto = Auth::user()->profile_photo_url;
+                        $Photo = Auth::user()->image;
                         @endphp
                         @if ($Photo == null)
-                            <img class="img-xs rounded-circle admin_picture" src="{{ $profilePhoto }}" alt="" />
+                        <img class="img-xs rounded-circle admin_picture" src="{{ $profilePhoto }}" alt="" />
                         @else
-                            <img class="img-xs rounded-circle admin_picture"
-                                src="{{ asset("uploads/profileImages/$Photo") }}" alt="" />
+                        <img class="img-xs rounded-circle admin_picture" src="{{ asset(" uploads/profileImages/$Photo")
+                            }}" alt="" />
                         @endif
                         <span class="count bg-success"></span>
                     </div>
                     <div class="profile-name">
                         <h5 class="mb-0 font-weight-normal">{{ Auth::user()->company_name }}</h5>
                         @if (Auth::user()->admin_type == 0)
-                            <span>HR</span>
+                        <span>HR</span>
                         @else
-                            <span>Admin</span>
+                        <span>Admin</span>
                         @endif
                     </div>
                 </div>
-                <a href="#" id="profile-dropdown" data-bs-toggle="dropdown"><i
-                        class="mdi mdi-dots-vertical"></i></a>
+                <a href="#" id="profile-dropdown" data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
                 <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
                     aria-labelledby="profile-dropdown">
                     <a href="{{ route('profile.show') }}" class="dropdown-item preview-item">
@@ -91,28 +90,27 @@
             </a>
         </li>
         @if (Auth::user()->admin_type == 1)
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="{{ route('users.index') }}">
-                    <span class="menu-icon">
-                        <i class="mdi mdi-account-convert"></i>
-                    </span>
-                    <span class="menu-title">Company</span>
-                </a>
-            </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ route('users.index') }}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-account-convert"></i>
+                </span>
+                <span class="menu-title">Company</span>
+            </a>
+        </li>
 
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="{{ route('logo') }}">
-                    <span class="menu-icon">
-                        <i class="mdi mdi-chemical-weapon"></i>
-                    </span>
-                    <span class="menu-title">Logo</span>
-                </a>
-            </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ route('logo') }}">
+                <span class="menu-icon">
+                    <i class="mdi mdi-chemical-weapon"></i>
+                </span>
+                <span class="menu-title">Logo</span>
+            </a>
+        </li>
         @endif
 
         <li class="nav-item menu-items">
-            <a class="nav-link" data-bs-toggle="collapse" href="#hr" aria-expanded="false"
-                aria-controls="home-slider">
+            <a class="nav-link" data-bs-toggle="collapse" href="#hr" aria-expanded="false" aria-controls="home-slider">
                 <span class="menu-icon">
                     <i class="mdi mdi-apple-keyboard-command"></i>
 
@@ -149,8 +147,7 @@
 <nav class="sidebar dark_sidebar">
     <div class="logo d-flex justify-content-between">
         @if ($logo)
-            <a class="large_logo" href="index.html"><img src="{{ asset('uploads/logo/' . $logo->image) }}"
-                    alt = "" /></a>
+            <a class="large_logo" href="index.html"><img src="{{ asset('uploads/logo/' . $logo->image) }}" alt="" /></a>
         @endif
         <a class="small_logo" href="index.html">
             @if ($miniLogo)
@@ -167,10 +164,12 @@
         </div>
     </div>
     <ul id="sidebar_menu">
+        <li class="menu-title" key="t-menu">Menu</li>
+
         <li class="">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="{{ asset('backend/assets/img/menu-icon/1.svg') }}" alt = "" />
+                    <img src="{{ asset('backend/assets/img/menu-icon/1.svg') }}" alt="" />
                 </div>
                 <div class="nav_title">
                     <span>Dashboard </span>
@@ -185,10 +184,10 @@
         <li class="">
             <a href="/admin/users" aria-expanded="false" class="active">
                 <div class="nav_icon_small">
-                    <img src="{{ asset('backend/assets/img/menu-icon/4.svg') }}" alt = "" />
+                    <img src="{{ asset('backend/assets/img/menu-icon/4.svg') }}" alt="" />
                 </div>
                 <div class="nav_title">
-                    <span>Admin List</span>
+                    <span>User List</span>
                 </div>
             </a>
         </li>
@@ -196,7 +195,7 @@
         <li>
             <a href="/admin/logo" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="{{ asset('backend/assets/img/menu-icon/14.svg') }}" alt = "" />
+                    <img src="{{ asset('backend/assets/img/menu-icon/14.svg') }}" alt="" />
                 </div>
                 <div class="nav_title">
                     <span>Logo</span>
@@ -204,11 +203,31 @@
             </a>
         </li>
 
+        <li class="menu-title" key="t-apps">Apps</li>
 
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{{ asset('backend/assets/img/menu-icon/settings.png') }}" alt="" />
+
+                </div>
+                <div class="nav_title">
+                    <span>Settings</span>
+                </div>
+            </a>
+            <ul>
+                <li> <a href="/user/profile">Profile Settings</a> </li>
+                <li> <a href="/admin/system-setting">System Settings</a> </li>
+                <li> <a href="/admin/social-media">Social Settings</a> </li>
+                <li> <a href="/admin/dynamic-page">Dynamic Page</a> </li>
+                <li> <a href="/admin/mail-setting">Mail Settings</a> </li>
+            </ul>
+        </li>
+        {{--
         <li class="">
             <a href="buy_sell.html" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="{{ asset('backend/assets/img/menu-icon/3.svg') }}" alt = "" />
+                    <img src="{{ asset('backend/assets/img/menu-icon/3.svg') }}" alt="" />
                 </div>
                 <div class="nav_title">
                     <span>Buy & Sell</span>
@@ -218,7 +237,7 @@
         <li class="">
             <a href="Trader_Profile.html" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="{{ asset('backend/assets/img/menu-icon/4.svg') }}" alt = "" />
+                    <img src="{{ asset('backend/assets/img/menu-icon/4.svg') }}" alt="" />
                 </div>
                 <div class="nav_title">
                     <span>Trader Profile</span>
@@ -228,7 +247,7 @@
         <li class="">
             <a href="crypto_stats.html" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="{{ asset('backend/assets/img/menu-icon/5.svg') }}" alt = "" />
+                    <img src="{{ asset('backend/assets/img/menu-icon/5.svg') }}" alt="" />
                 </div>
                 <div class="nav_title">
                     <span>Crypto Stats</span>
@@ -238,7 +257,7 @@
         <li class="">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="{{ asset('backend/assets/img/menu-icon/6.svg') }}" alt = "" />
+                    <img src="{{ asset('backend/assets/img/menu-icon/6.svg') }}" alt="" />
                 </div>
                 <div class="nav_title">
                     <span>Transactions</span>
@@ -254,7 +273,7 @@
         <li class="">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="{{ asset('backend/assets/img/menu-icon/7.svg') }}" alt = "" />
+                    <img src="{{ asset('backend/assets/img/menu-icon/7.svg') }}" alt="" />
                 </div>
                 <div class="nav_title">
                     <span>Tickers</span>
@@ -268,7 +287,7 @@
         <li class="">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="{{ asset('backend/assets/img/menu-icon/8.svg') }}" alt = "" />
+                    <img src="{{ asset('backend/assets/img/menu-icon/8.svg') }}" alt="" />
                 </div>
                 <div class="nav_title">
                     <span>Apps </span>
@@ -288,7 +307,7 @@
         <li class="">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="{{ asset('backend/assets/img/menu-icon/Pages.svg') }}" alt = "" />
+                    <img src="{{ asset('backend/assets/img/menu-icon/Pages.svg') }}" alt="" />
                 </div>
                 <div class="nav_title">
                     <span>Pages</span>
@@ -313,7 +332,7 @@
         <li class="">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="{{ asset('backend/assets/img/menu-icon/General.svg') }}" alt = "" />
+                    <img src="{{ asset('backend/assets/img/menu-icon/General.svg') }}" alt="" />
                 </div>
                 <div class="nav_title">
                     <span>General</span>
@@ -328,7 +347,7 @@
         <li class="">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="{{ asset('backend/assets/img/menu-icon/Mail_Box.svg') }}" alt = "" />
+                    <img src="{{ asset('backend/assets/img/menu-icon/Mail_Box.svg') }}" alt="" />
                 </div>
                 <div class="nav_title">
                     <span>Mail Box </span>
@@ -345,7 +364,7 @@
         <li class="">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="{{ asset('backend/assets/img/menu-icon/icon.svg') }}" alt = "" />
+                    <img src="{{ asset('backend/assets/img/menu-icon/icon.svg') }}" alt="" />
                 </div>
                 <div class="nav_title">
                     <span>Icons</span>
@@ -359,7 +378,7 @@
         <li class="">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="{{ asset('backend/assets/img/menu-icon/18.svg') }}" alt = "" />
+                    <img src="{{ asset('backend/assets/img/menu-icon/18.svg') }}" alt="" />
                 </div>
                 <div class="nav_title">
                     <span>UI Elements </span>
@@ -385,7 +404,7 @@
         <li class="">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="{{ asset('backend/assets/img/menu-icon/forms.svg') }}" alt = "" />
+                    <img src="{{ asset('backend/assets/img/menu-icon/forms.svg') }}" alt="" />
                 </div>
                 <div class="nav_title">
                     <span>forms</span>
@@ -401,7 +420,7 @@
         <li class="">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="{{ asset('backend/assets/img/menu-icon/14.svg') }}" alt = "" />
+                    <img src="{{ asset('backend/assets/img/menu-icon/14.svg') }}" alt="" />
                 </div>
                 <div class="nav_title">
                     <span>Widgets</span>
@@ -419,7 +438,7 @@
         <li class="">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="{{ asset('backend/assets/img/menu-icon/17.svg') }}" alt = "" />
+                    <img src="{{ asset('backend/assets/img/menu-icon/17.svg') }}" alt="" />
                 </div>
                 <div class="nav_title">
                     <span>Table</span>
@@ -433,7 +452,7 @@
         <li class="">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="{{ asset('backend/assets/img/menu-icon/16.svg') }}" alt = "" />
+                    <img src="{{ asset('backend/assets/img/menu-icon/16.svg') }}" alt="" />
                 </div>
                 <div class="nav_title">
                     <span>Charts</span>
@@ -450,7 +469,7 @@
         <li class="">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="nav_icon_small">
-                    <img src="{{ asset('backend/assets/img/menu-icon/map.svg') }}" alt = "" />
+                    <img src="{{ asset('backend/assets/img/menu-icon/map.svg') }}" alt="" />
                 </div>
                 <div class="nav_title">
                     <span>Maps</span>
@@ -460,7 +479,7 @@
                 <li><a href="mapjs.html">Maps JS</a></li>
                 <li><a href="vector_map.html">Vector Maps</a></li>
             </ul>
-        </li>
+        </li> --}}
     </ul>
 </nav>
 <!--/ sidebar  -->

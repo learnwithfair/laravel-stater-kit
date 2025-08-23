@@ -5,9 +5,36 @@
             {{ __('Profile') }}
         </h2>
     </x-slot>
-
-    <div>
+    <div class="content-wrapper">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="dashboard_header">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="dashboard_header_title">
+                                <h3> Profile Info</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="dashboard_breadcam text-end">
+                                <p><a href="{{ route('admin.dashboard') }}">Dashboard</a> <i
+                                        class="fas fa-caret-right"></i>
+                                    <a href="{{ route('profile.show') }}"> Profile</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+
+            <div class="mt-5 sm:mt-0">
+                @livewire('update-profile-picture-form')
+            </div>
+
+            <x-section-border />
+
             @if (Laravel\Fortify\Features::canUpdateProfileInformation())
                 @livewire('profile.update-profile-information-form')
 
@@ -22,20 +49,16 @@
                 <x-section-border />
             @endif
             {{-- @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::UpdateProfilePictureForm())) --}}
+
+            {{-- @endif --}}
+
+            {{-- @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
             <div class="mt-5 sm:mt-0">
-                @livewire('update-profile-picture-form')
+                @livewire('profile.two-factor-authentication-form')
             </div>
 
             <x-section-border />
-            {{-- @endif --}}
-
-            @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
-                <div class="mt-5 sm:mt-0">
-                    @livewire('profile.two-factor-authentication-form')
-                </div>
-
-                <x-section-border />
-            @endif
+            @endif --}}
 
             <div class="mt-5 sm:mt-0">
                 @livewire('profile.logout-other-browser-sessions-form')

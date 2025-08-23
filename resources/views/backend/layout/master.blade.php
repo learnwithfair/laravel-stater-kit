@@ -38,6 +38,7 @@
     <!-- Script Start -->
     @include('backend.layout._script')
     @yield('script')
+    @stack('script')
 
     <!-- Custom Spinner Start -->
     @include('backend.layout.modal._spinner')

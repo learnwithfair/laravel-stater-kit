@@ -14,17 +14,19 @@ class SocialMediaController extends Controller
     public function index()
     {
         $social_link = SocialMedia::latest('id')->get();
-        return view('backend.layouts.settings.social_media', compact('social_link'));
+        return view('backend.settings.social_media', compact('social_link'));
     }
 
     public function update(Request $request)
     {
+       
+        
         $validator = Validator::make($request->all(), [
             'social_media.*'    => 'required|string',
             'profile_link.*'    => 'required|url',
             'social_media_id.*' => 'sometimes|nullable|integer',
         ]);
-
+        
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
