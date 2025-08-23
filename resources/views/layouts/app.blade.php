@@ -2,12 +2,15 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+       <meta charset="utf-8">
+    <meta name="description" content="EdenProse">
+    <meta name="keywords" content="EdenProse, eden prose">
+    <meta name="author" content="Rahatul Rabbi, Rahatul, Rabbi, Rahatul-Rabbi, Rahatul_Rabbi, MD RAHATUL RABBI">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'EdenProse') }} || Profile</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="{{ asset($systemSetting->favicon ?? 'backend/assets/images/logo-minimize.svg') }}">
+    <title>{{ $systemSetting->system_name  }}@yield('title')</title>
     <!-- Fonts -->
 
     <link rel="stylesheet" href="{{ asset('backend/assets/admin/ijaboCropTool.min.css') }}">
@@ -18,7 +21,7 @@
 
     <!-- Styles -->
 
-    @include('backend.layout._head')
+    @include('backend.layout._style')
     {{-- <style>
         .header-sticky {
             display: none;

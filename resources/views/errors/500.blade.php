@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    @include('backend.layout._head')
+    @include('backend.layout._style')
 </head>
 
 <body>

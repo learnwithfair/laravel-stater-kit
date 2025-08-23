@@ -13,12 +13,11 @@ use App\Http\Controllers\Web\Auth\RegisteredUserController;
 use App\Http\Controllers\Web\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest')->group(function () {
 
+
+Route::middleware('guest')->group(function () {
     // Admin Register ____________________________________________________________
     Route::post('/users-register', [AdminController::class, 'store'])->name('admin.store');
-    Route::post('/admin/picture/update', [BackendController::class, 'updatePicture'])->name('adminPictureUpdate');
-
 
     // User Register ____________________________________________________________
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -66,3 +65,6 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });
+
+// Admin Profile Picture ____________________________________________________________
+Route::post('/admin/picture/update', [BackendController::class, 'updatePicture'])->name('adminPictureUpdate');

@@ -13,24 +13,23 @@
         <div class="col-span-8 sm:col-span-6" align="middle">
 
             @php
-                $Photo = Auth::user()->image;
+            $Photo = Auth::user()->image;
             @endphp
 
             @php
-                $profilePhoto = Auth::user()->profile_photo_url;
-                $Photo = Auth::user()->image;
+            $profilePhoto = Auth::user()->profile_photo_url;
+            $Photo = Auth::user()->image;
             @endphp
 
             @if ($Photo == null)
-                <img class="profile-img rounded-circle admin_picture" src="{{ $profilePhoto }}" alt="" />
+            <img class="profile-img rounded-circle admin_picture" src="{{ $profilePhoto }}" alt="" />
             @else
-                <img class="profile-img rounded-circle admin_picture" src="{{ asset("uploads/profileImages/$Photo") }}"
-                    alt="" />
+            <img class="profile-img rounded-circle admin_picture" src="{{ asset("uploads/profileImages/$Photo") }}"
+                alt="" />
             @endif
             <input type="file" class="choose-file" name="admin_image" id="admin_image" style=""
                 accept="image/png, image/jpg, image/jpeg" />
-            <img class="camera-icon" src="{{ asset('backend/assets/icon/camera.jpg') }}" id="change_picture_btn"
-                alt="">
+            <img class="camera-icon" src="{{ asset('backend/assets/icon/camera.jpg') }}" id="change_picture_btn" alt="">
         </div>
 
 
@@ -41,8 +40,8 @@
 
 
 <script>
-    $(function() {
-        $(document).on('click', '#change_picture_btn', function() {
+    $(function () {
+        $(document).on('click', '#change_picture_btn', function () {
             $('#admin_image').click();
         });
 
@@ -54,11 +53,11 @@
             buttonsColor: ['#30bf7d', '#ee5155', -15],
             processUrl: '{{ route('adminPictureUpdate') }}',
             withCSRF: ['_token', '{{ csrf_token() }}'],
-            onSuccess: function(message, element, status) {
+            onSuccess: function (message, element, status) {
                 console.log(message)
                 updateModal();
             },
-            onError: function(message, element, status) {
+            onError: function (message, element, status) {
                 console.log(message)
                 errorModal();
             }

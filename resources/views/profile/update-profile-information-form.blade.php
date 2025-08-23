@@ -21,7 +21,7 @@
         <div class="col-span-6 sm:col-span-4 mt-3">
             <x-label for="email" value="{{ __('Email') }}" />
             <x-input id="email" type="email" class="mt-1 block w-full form-control"
-                wire:model.defer="state.email" />
+                wire:model.defer="state.email" readOnly/>
             <x-input-error for="email" class="mt-2" />
 
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) &&

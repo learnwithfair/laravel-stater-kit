@@ -5,7 +5,8 @@
             <div class="col-lg-12">
                 <div class="footer_iner text-center text-dark">
                     <i>
-                        © {{ now()->year }} EdenProse. All rights reserved.
+                        {{-- © {{ now()->year }} --}}
+                        {{$systemSetting->copyright_text}}
                     </i>
                 </div>
             </div>

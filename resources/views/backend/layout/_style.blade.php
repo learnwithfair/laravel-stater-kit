@@ -1,28 +1,3 @@
-<!-- Database Connect Start -->
-@include('backend.database.connection')
-<!-- Database Connect Start End -->
-@php
-    //Database Connection
-    $obj = new DatabaseConnection(); // create class
-    $logo = $obj->HeaderLogo(); //Get Header Logo
-    $miniLogo = $obj->MiniLogo(); //Get Mini Logo
-    // $title = $obj->websiteTitle(); //Get Website title
-@endphp
-
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="description" content="EdenProse">
-<meta name="keywords" content="EdenProse, eden prose">
-<meta name="author" content="Rahatul Rabbi, Rahatul, Rabbi, Rahatul-Rabbi, Rahatul_Rabbi, MD RAHATUL RABBI">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="icon" type="image/png" href="{{ asset('backend/assets/img/mini_logo.png') }}">
-
-<meta name="csrf-token" content="{{ csrf_token() }}">
-
-
-<title>{{ config('app.name', 'EdenProse') }}@yield('title')</title>
-
 <!-- For Logout -->
 {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
@@ -97,7 +72,7 @@
 </style>
 {{-- dropify and ck-editor end --}}
 
-{{--  --}}
+{{-- --}}
 <style>
     .note-modal-backdrop {
         z-index: 0 !important;

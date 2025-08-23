@@ -10018,7 +10018,7 @@ canvas#highlights {
 /* line 66, G:/admin_project/10 admin/cryptocurrency/scss/_notification.scss */
 .property_wrapper .single_property .property_thumb img {
   width: 190px;
-  height: 173px;
+  height: 90px;
   border-radius: 5px;
 }
 
@@ -11442,7 +11442,7 @@ a.pswp__share--download:hover {
   /* line 2, G:/admin_project/10 admin/cryptocurrency/scss/_notification_menu.scss */
   .Menu_NOtification_Wrap {
     width: 300px;
-    transform: translateY(30px) translateX(173px);
+    transform: translateY(30px) translateX(90px);
   }
 }
 
@@ -11450,13 +11450,13 @@ a.pswp__share--download:hover {
 .Menu_NOtification_Wrap.active {
   opacity: 1;
   visibility: visible;
-  transform: translateY(20px) translateX(173px);
+  transform: translateY(20px) translateX(90px);
 }
 
 @media (max-width: 575.98px) {
   /* line 17, G:/admin_project/10 admin/cryptocurrency/scss/_notification_menu.scss */
   .Menu_NOtification_Wrap.active {
-    transform: translateY(16px) translateX(173px);
+    transform: translateY(16px) translateX(90px);
   }
 }
 
@@ -11480,6 +11480,7 @@ a.pswp__share--download:hover {
   padding: 20px 20px;
   height: 300px;
   overflow: auto;
+  right: 0;
 }
 
 /* line 40, G:/admin_project/10 admin/cryptocurrency/scss/_notification_menu.scss */

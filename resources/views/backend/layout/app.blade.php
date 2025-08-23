@@ -2,7 +2,18 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    @include('backend.layout._head')
+    <meta charset="utf-8">
+    <meta name="description" content="EdenProse">
+    <meta name="keywords" content="EdenProse, eden prose">
+    <meta name="author" content="Rahatul Rabbi, Rahatul, Rabbi, Rahatul-Rabbi, Rahatul_Rabbi, MD RAHATUL RABBI">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="{{ asset($systemSetting->favicon ?? 'backend/assets/images/logo-minimize.svg') }}">
+    <title>{{ $systemSetting->system_name  }}@yield('title')</title>
+
+
+    @include('backend.layout._style')
     @stack('style')
 </head>
 
@@ -29,13 +40,9 @@
             <i class="ti-angle-up"></i>
         </a>
     </div>
-
-
-
-    <!-- Modal Start -->
+    
     @yield('modal')
 
-    <!-- Script Start -->
     @include('backend.layout._script')
     @yield('script')
     @stack('script')

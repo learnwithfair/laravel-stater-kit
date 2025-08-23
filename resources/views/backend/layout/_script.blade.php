@@ -1,4 +1,4 @@
-<script src="{{ asset('backend/assets/vendors/js/vendor.bundle.base.js') }}"></script>
+{{-- <script src="{{ asset('backend/assets/vendors/js/vendor.bundle.base.js') }}"></script> --}}
 
 
 

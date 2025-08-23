@@ -3,18 +3,19 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="EdenProse">
+    <meta name="keywords" content="EdenProse, eden prose">
+    <meta name="author" content="Rahatul Rabbi, Rahatul, Rabbi, Rahatul-Rabbi, Rahatul_Rabbi, MD RAHATUL RABBI">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}@yield('title')</title>
-
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="{{ asset($systemSetting->favicon ?? 'backend/assets/images/logo-minimize.svg') }}">
+    <title>{{ $systemSetting->system_name  }}@yield('title')</title>
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
-    @include('backend.layout._head')
+    @include('backend.layout._style')
 
     <style>
         label,
@@ -25,7 +26,7 @@
 
 </head>
 
-<body onload="preloaderFunction()" style="overflow-x: hidden; background-color: #4285F4;" >
+<body onload="preloaderFunction()" style="overflow-x: hidden; background-color: #4285F4;">
     <!-- Preloader Start -->
     @include('backend.layout.modal._preloader')
     <!-- Preloader End -->

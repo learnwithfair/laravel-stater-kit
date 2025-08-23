@@ -23,13 +23,7 @@
             "{{ route('home') }}",
         ],
 
-
-
-        [
-            "Logo",
-            "<i class='mdi mdi-chemical-weapon text-warning'></i>",
-            "{{ route('logo') }}",
-        ],
+       
         [
             "Leaves",
             "<i class='mdi mdi-email text-info'></i>",

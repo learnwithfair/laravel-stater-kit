@@ -20,14 +20,11 @@ class BackendController extends Controller {
         return view( 'backend.dashboard' );
     }
 
-    public function logo() {
-
-        $logoInfo = Logo::limit( 3 )->orderBy( 'id', 'DESC' )->get();
-        return view( 'backend.logo.logo', compact( 'logoInfo' ) );
-
-    }
+ 
 
     public function updatePicture( Request $request ) {
+
+        // dd( $request->file('admin_image') );
         $path = 'uploads/profileImages/';
         $file = $request->file( 'admin_image' );
         $new_name = 'admin_' . date( 'Ymd' ) . uniqid() . '.jpg';
