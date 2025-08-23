@@ -24,7 +24,7 @@
             @if ($Photo == null)
             <img class="profile-img rounded-circle admin_picture" src="{{ $profilePhoto }}" alt="" />
             @else
-            <img class="profile-img rounded-circle admin_picture" src="{{ asset("uploads/profileImages/$Photo") }}"
+            <img class="profile-img rounded-circle admin_picture" src="{{ asset('uploads/profileImages/'.$Photo) }}"
                 alt="" />
             @endif
             <input type="file" class="choose-file" name="admin_image" id="admin_image" style=""

@@ -11,17 +11,18 @@ class NotificationController extends Controller
 {
     use ApiResponse; // Use the trait
 
-    public function index() {
-        $notification = Notification::query()
-                    ->with(['user:id,name,email,avatar'])
-                    ->where('notifiable_id', auth()->user()->id)
-                    ->latest()
-                    ->get();
+    public function index()
+    {
+        // $notification = Notification::query()
+        //             ->with(['user:id,name,email,avatar'])
+        //             ->where('notifiable_id', auth()->user()->id)
+        //             ->latest()
+        //             ->get();
 
-        if ($notification->isEmpty()) {
-            return $this->error([], 'Notifications not found', 404);
-        }
+        // if ($notification->isEmpty()) {
+        //     return $this->error([], 'Notifications not found', 404);
+        // }
 
-        return $this->success($notification, 'Notifications retrieved successfully');
+        // return $this->success($notification, 'Notifications retrieved successfully');
     }
 }

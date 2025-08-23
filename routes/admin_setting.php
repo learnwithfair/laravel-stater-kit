@@ -8,6 +8,11 @@ use App\Http\Controllers\Web\Backend\Settings\SocialMediaController;
 use App\Http\Controllers\Web\Backend\Settings\SystemSettingController;
 
 
+// |--------------------------------------------------------------------------
+// |                                Admin Setting route for dashboard
+// |--------------------------------------------------------------------------
+
+
 //! This route is for updating the user's profile_______________________________________________________
 Route::controller(ProfileController::class)->group(function () {
     Route::post('/update-profile-picture', 'UpdateProfilePicture')->name('update.profile.picture');

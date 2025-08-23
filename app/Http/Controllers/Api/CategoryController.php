@@ -13,31 +13,31 @@ class CategoryController extends Controller
 
 
     public function category() {
-        $category = Category::query()
-                    ->select(['id','name', 'image_url'])
-                    ->where('status', 'active')
-                    ->latest()
-                    ->take(5)
-                    ->get();
+        // $category = Category::query()
+        //             ->select(['id','name', 'image_url'])
+        //             ->where('status', 'active')
+        //             ->latest()
+        //             ->take(5)
+        //             ->get();
 
-        if ($category->isEmpty()) {
-            return $this->error([], 'Categorys not found', 404);
-        }
+        // if ($category->isEmpty()) {
+        //     return $this->error([], 'Categorys not found', 404);
+        // }
 
-        return $this->success($category, 'Categorys retrieved successfully');
+        // return $this->success($category, 'Categorys retrieved successfully');
     }
 
     public function categoryAll() {
-        $category = Category::query()
-                    ->select(['id','name', 'image_url'])
-                    ->where('status', 'active')
-                    ->latest()
-                    ->get();
+        // $category = Category::query()
+        //             ->select(['id','name', 'image_url'])
+        //             ->where('status', 'active')
+        //             ->latest()
+        //             ->get();
 
-        if ($category->isEmpty()) {
-            return $this->error([], 'Categorys not found', 404);
-        }
+        // if ($category->isEmpty()) {
+        //     return $this->error([], 'Categorys not found', 404);
+        // }
 
-        return $this->success($category, 'Categorys retrieved successfully');
+        // return $this->success($category, 'Categorys retrieved successfully');
     }
 }

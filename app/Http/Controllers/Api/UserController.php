@@ -106,8 +106,6 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return $this->error([], $e->getMessage(), 500);
         }
-
-
     }
 
 

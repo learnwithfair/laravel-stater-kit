@@ -3,10 +3,12 @@
 use App\Http\Controllers\Backend\Admin\AdminController;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\LeaveController;
-use App\Http\Controllers\Backend\Logo\LogoController;
-use App\Http\Controllers\Web\Backend\DashboardController;
 use Illuminate\Support\Facades\Route;
 
+
+// |--------------------------------------------------------------------------
+// |                                Backend Route
+// |--------------------------------------------------------------------------
 
 
 // Verified Controller ____________________________________________________________

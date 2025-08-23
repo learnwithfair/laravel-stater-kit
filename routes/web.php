@@ -1,8 +1,13 @@
 <?php
 
-use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Frontend\AuthController;
 use Illuminate\Support\Facades\Route;
+
+
+
+// |--------------------------------------------------------------------------
+// |                                Test Route
+// |--------------------------------------------------------------------------
 
 
 // User Controller _______________________________________________________

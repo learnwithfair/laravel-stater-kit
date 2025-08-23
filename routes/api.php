@@ -1,14 +1,22 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get( '/user', function ( Request $request ) {
-    return $request->user();
-} )->middleware( 'auth:sanctum' );
-
 // |--------------------------------------------------------------------------
-// |                                API
+// |                                API Route
 // |--------------------------------------------------------------------------
 
-// | Admin (Company) Controller --------------------------------------------------------------------------
+
+// User Register --------------------------------------------------------------------------
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login',    [AuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/me',        [AuthController::class, 'me']);
+    Route::post('/logout',   [AuthController::class, 'logout']);
+    Route::post('/logout-all', [AuthController::class, 'logoutAll']);
+
+    // Example protected route(s) go here...
+});

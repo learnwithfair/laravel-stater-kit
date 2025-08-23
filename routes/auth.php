@@ -14,6 +14,10 @@ use App\Http\Controllers\Web\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 
+// |--------------------------------------------------------------------------
+// |                                Authentication Route
+// |--------------------------------------------------------------------------
+
 
 Route::middleware('guest')->group(function () {
     // Admin Register ____________________________________________________________
