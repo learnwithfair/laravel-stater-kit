@@ -8,8 +8,6 @@
     </x-slot>
 
     <x-slot name="form">
-
-
         <div class="col-span-8 sm:col-span-6" align="middle">
 
             @php
@@ -35,8 +33,7 @@
 
     </x-slot>
 </x-form-section>
-@include('backend.layout.modal._update_modal')
-@include('backend.layout.modal._error_modal')
+@include('backend.layout.modal._toast_modal')
 
 
 <script>
@@ -55,7 +52,7 @@
             withCSRF: ['_token', '{{ csrf_token() }}'],
             onSuccess: function (message, element, status) {
                 console.log(message)
-                updateModal();
+                successModal('SUCCESSFULLY UPLOADED');
             },
             onError: function (message, element, status) {
                 console.log(message)

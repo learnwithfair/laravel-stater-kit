@@ -60,7 +60,7 @@
                                 @csrf
                                 <div style="display: flex; justify-content: end; margin-bottom: 20px;">
                                     <button class="btn btn-primary btn-md" type="button" onclick="addSocialField()"
-                                        style="font-weight: 900" title="Add a new social media field">Add New</button>
+                                        style="font-weight: 900" title="Add a new social media field">Add</button>
                                 </div>
 
                                 <div id="social_media_container">
@@ -112,97 +112,136 @@
     </div>
 @endsection
 
-@section('modal')
-    @include('backend.layout.modal._delete_confirm')
-@endsection
-
+{{-- @section('modal')
+@include('backend.layout.modal._delete_confirm')
+@include('backend.logo._logo_change_status_modal')
+@endsection --}}
 @section('script')
+    {{-- @include('backend.ajax._logoJS') --}}
+
     <script>
         let socialFieldsCount = $('#social_media_container .social_media1').length;
 
-        // Open delete modal
-        $(document).on('click', '.removeSocialBtn', function () {
-            $('#delete_id').val($(this).data('id'));
-            $('#deletemodal').modal('show');
-        });
-
-        // Handle delete confirm
-        $('#delete_modal_clear').on('submit', function (e) {
-            e.preventDefault();
-            let id = $('#delete_id').val();
-
-            $.ajax({
-                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                type: 'DELETE',
-                url: '{{ route('social.delete', ':id') }}'.replace(':id', id),
-                data: { _token: '{{ csrf_token() }}' },
-                success: function (response) {
-                    if (response.success) {
-                        $('button[data-id="' + id + '"]').closest('.social_media1').remove();
-                        socialFieldsCount--;
-                        $('#deletemodal').modal('hide');
-                        successModal(response.message || 'Deleted successfully');
-                    } else {
-                        errorModal('Deletion failed');
-                    }
-                },
-                error: function () {
-                    errorModal('An error occurred');
-                }
-            });
-        });
-
-        // Add new social field
         function addSocialField() {
-            if (socialFieldsCount >= 4) {
-                errorModal("You can only add four social links fields!");
-                return;
-            }
-            const container = document.getElementById("social_media_container");
-            const newField = `
-                            <div class="mb-3 social_media1 input-group">
-                                <select class="border dropdown-toggle" name="social_media[]">
-                                    <option>Select Social</option>
-                                    <option value="facebook">Facebook</option>
-                                    <option value="instagram">Instagram</option>
-                                    <option value="twitter">Twitter</option>
-                                    <option value="linkedin">Linkedin</option>
-                                </select>
-                                <input type="url" class="form-control" name="profile_link[]" placeholder="Enter profile link">
-                                <button class="btn btn-warning" type="button" onclick="removeNewSocialField(this)">Remove</button>
-                            </div>`;
-            container.insertAdjacentHTML("beforeend", newField);
-            socialFieldsCount++;
-            attachDuplicateCheck();
-        }
+            const socialFieldsContainer = document.getElementById("social_media_container");
 
-        function removeNewSocialField(button) {
-            button.closest('.social_media1').remove();
-            socialFieldsCount--;
-            attachDuplicateCheck();
-        }
+            if (socialFieldsCount < 4) {
+                const newSocialField = document.createElement("div");
+                newSocialField.className = "social_media1 input-group mb-3";
+                newSocialField.innerHTML =
+                    `<select class="dropdown-toggle drop-custom" name="social_media[]">
+                                        <option class="dropdown-item">Select Social</option>
+                                        <option class="dropdown-item" value="facebook">Facebook</option>
+                                        <option class="dropdown-item" value="instagram">Instagram</option>
+                                        <option class="dropdown-item" value="twitter">Twitter</option>
+                                        <option class="dropdown-item" value="linkedin">Linkedin</option>
+                                    </select>
+                                    <input type="url" class="form-control" aria-label="Text input with dropdown button" name="profile_link[]" placeholder="Enter the profile link here">
+                                    <button class="btn btn-outline-warning" type="button" onclick="removeNewSocialField(this)" style="font-weight: 900">Remove</button>`;
 
-        function attachDuplicateCheck() {
-            document.querySelectorAll('select[name="social_media[]"]').forEach(select => {
-                select.removeEventListener('change', checkForDuplicateSocialMedia);
-                select.addEventListener('change', checkForDuplicateSocialMedia);
-            });
-        }
+                socialFieldsContainer.appendChild(newSocialField);
+                socialFieldsCount++;
 
-        function checkForDuplicateSocialMedia() {
-            const allValues = Array.from(document.querySelectorAll('select[name="social_media[]"]')).map(s => s.value);
-            const duplicates = allValues.filter((v, i) => allValues.indexOf(v) !== i && v !== "Select Social");
-            if (duplicates.length) {
-                errorModal("Duplicate social media platform not allowed.");
-                document.querySelectorAll('select[name="social_media[]"]').forEach(select => {
-                    if (duplicates.includes(select.value)) select.value = "Select Social";
+                // Add event listener for duplicate check
+                document.querySelectorAll('select[name="social_media[]"]').forEach(selectElement => {
+                    selectElement.removeEventListener('change', checkForDuplicateSocialMedia);
+                    selectElement.addEventListener('change', checkForDuplicateSocialMedia);
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "You can only add four social links fields!",
                 });
             }
         }
 
+        // Function to remove newly added fields (no AJAX call needed)
+        function removeNewSocialField(button) {
+            const socialField = button.parentElement;
+            socialField.remove();
+            socialFieldsCount--;
+            checkForDuplicateSocialMedia();
+        }
+
+        function checkForDuplicateSocialMedia() {
+            const allSelections = document.querySelectorAll('select[name="social_media[]"]');
+            const allValues = Array.from(allSelections).map(select => select.value);
+            const hasDuplicate = allValues.some((value, index) => allValues.indexOf(value) !== index && value !== "Select Social");
+
+            if (hasDuplicate) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "You cannot add the same social media platform more than once.",
+                });
+                allSelections.forEach(selectElement => {
+                    if (allValues.filter(value => value === selectElement.value).length > 1) {
+                        selectElement.value = "Select Social";
+                    }
+                });
+            }
+        }
+
+        // Function to remove existing fields (with AJAX call to delete from database)
+        window.removeSocialField = function (button) {
+            const socialLinkId = $(button).data('id');
+
+            // Show confirmation dialog before deletion
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: 'DELETE',
+                        url: '{{ route('social.delete', ':id') }}'.replace(':id', socialLinkId),
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function (response) {
+                            $(button).closest('.social_media1').remove();
+                            socialFieldsCount--;
+
+                            if (response.success === true) {
+                               deleteModal();
+                            } else {
+                                errorModal();
+                            }
+
+                            checkForDuplicateSocialMedia();
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error:', error);
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: "Something went wrong. Please try again.",
+                            });
+                        }
+                    });
+                }
+            });
+        };
+
+        // Initialize duplicate check for existing fields and attach remove button events
         $(document).ready(function () {
-            attachDuplicateCheck();
+            document.querySelectorAll('select[name="social_media[]"]').forEach(selectElement => {
+                selectElement.addEventListener('change', checkForDuplicateSocialMedia);
+            });
+
+            // Attach click events to existing remove buttons
+            $('.removeSocialBtn').on('click', function () {
+                window.removeSocialField(this);
+            });
         });
     </script>
-
 @endsection

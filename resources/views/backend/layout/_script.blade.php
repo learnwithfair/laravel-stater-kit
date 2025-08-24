@@ -1,30 +1,17 @@
-{{--
-<script src="{{ asset('backend/assets/vendors/js/vendor.bundle.base.js') }}"></script> --}}
-
-
-
-<!-- footer  -->
 <script src="{{ asset('backend/assets/js/jquery1-3.4.1.min.js') }}"></script>
-<!-- popper js -->
 <script src="{{ asset('backend/assets/js/popper1.min.js') }}"></script>
-<!-- bootstarp js -->
 <script src="{{ asset('backend/assets/js/bootstrap1.min.js') }}"></script>
 
 
 <!-- sidebar menu  -->
 <script src="{{ asset('backend/assets/js/metisMenu.js') }}"></script>
-<!-- Theme Light and dark + fullscreen  -->
 <script src="{{ asset('backend/assets/js/theme.js') }}"></script>
-<!-- waypoints js -->
 <script src="{{ asset('backend/assets/vendors/count_up/jquery.waypoints.min.js') }}"></script>
-<!-- waypoints js -->
 <script src="{{ asset('backend/assets/vendors/chartlist/Chart.min.js') }}"></script>
-<!-- counterup js -->
 <script src="{{ asset('backend/assets/vendors/count_up/jquery.counterup.min.js') }}"></script>
 
 <!-- nice select -->
 <script src="{{ asset('backend/assets/vendors/niceselect/js/jquery.nice-select.min.js') }}"></script>
-<!-- owl carousel -->
 <script src="{{ asset('backend/assets/vendors/owl_carousel/js/owl.carousel.min.js') }}"></script>
 
 <!-- responsive table -->
@@ -48,8 +35,10 @@
 
 <!-- progressbar js -->
 <script src="{{ asset('backend/assets/vendors/progressbar/jquery.barfiller.js') }}"></script>
+
 <!-- tag input -->
 <script src="{{ asset('backend/assets/vendors/tagsinput/tagsinput.js') }}"></script>
+
 <!-- text editor js -->
 <script src="{{ asset('backend/assets/vendors/text_editor/summernote-bs4.js') }}"></script>
 <script src="{{ asset('backend/assets/vendors/am_chart/amcharts.js') }}"></script>
@@ -80,32 +69,17 @@
 <script src="{{ asset('assets/password-toggle.js') }}"></script>
 
 
-
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
-<!-- End  js for Bootsrap -->
 
 {{-- For ajax --}}
 @include('backend.ajax.masterAjax')
+
 <!-- start  js for datatable -->
 <script src=" https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-<script>
-    // Call the dataTables jQuery plugin
-    $(document).ready(function () {
-        $('#dataTable').DataTable({
-            language: {
-                paginate: {
-                    previous: '<i class="fas fa-angle-left"></i>', // or 'Prev'
-                    next: '<i class="fas fa-angle-right"></i>' // or 'Next'
-                }
-            }
-        });
-    });
-</script>
-<!-- End  js for datatable -->
+
 
 
 <script src="{{ asset('backend/assets/js/dropify.min.js')}}"></script>

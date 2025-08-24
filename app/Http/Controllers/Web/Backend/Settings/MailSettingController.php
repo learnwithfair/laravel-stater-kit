@@ -64,9 +64,9 @@ class MailSettingController extends Controller {
                 if ($envContent !== null) {
                     File::put(base_path('.env'), $envContent);
                 }
-                return back()->with('t-success', 'Updated successfully');
+                return back()->with('success', 'Updated successfully');
             } catch (Exception) {
-                return back()->with('t-error', 'Failed to update');
+                return back()->with('error', 'Failed to update');
             }
         }
         return redirect()->back();

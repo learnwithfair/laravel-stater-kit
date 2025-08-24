@@ -39,7 +39,7 @@ input#itemSearch:focus {
 
 /* For Modal Start */
 .modal_icon img {
-    border-radius: 50%;
+    /* border-radius: 50%; */
     height: 60px;
     width: 60px;
     object-fit: contain;
@@ -159,4 +159,6 @@ td {
     font-weight: bold !important;
 }
 
-
+.table-title{
+    color: #373063 ;
+}

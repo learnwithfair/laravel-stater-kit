@@ -85,9 +85,9 @@ class SystemSettingController extends Controller
 
 
             $setting->save();
-            return back()->with('t-success', 'Updated successfully');
+            return back()->with('success', 'Updated successfully');
         } catch (Exception) {
-            return back()->with('t-error', 'Failed to update');
+            return back()->with('error', 'Failed to update');
         }
     }
 }

@@ -18,28 +18,15 @@
                 </div>
 
                 <div>
-                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"
-                        style="margin:0px 10px">Cancel</button>
-                    <button type="submit" class="btn btn-danger delete_data btn-sm" data-dismiss="modal"
+
+                    <button type="button" class="btn btn-secondary btn-sm" style="margin:0px 10px"
+                        data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger delete_data btn-sm" data-bs-dismiss="modal"
                         style="margin:0px 10px">Delete</button>
+
                 </div>
             </form>
 
         </div>
     </div>
 </div>
-{{-- For detele Confirm Modal  --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $(document).on('click', '.deletebtn', function(e) {
-            e.preventDefault();
-            let id = $(this).data('id');
-            let type = $(this).data('type');
-            $('#delete_id').val(id);
-            $('#delete_type').val(type);
-        });
-
-    });
-</script>

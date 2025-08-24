@@ -1,125 +1,131 @@
 <script>
-    $(document).ready(function() {
-        // Delete section start
-        $(document).on('click', '.delete_data', function(e) {
+    document.addEventListener('DOMContentLoaded', function () {
+
+
+        // Init DataTable
+        const dt = $('#data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            responsive: true,
+            ajax: '{{ route('users.index') }}',
+            order: [[0, 'desc']],
+            language: {
+                paginate: {
+                    previous: '<i class="fas fa-angle-left"></i>', // or 'Prev'
+                    next: '<i class="fas fa-angle-right"></i>' // or 'Next'
+                },
+                processing: `<div class="text-center">
+                                <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                              </div>
+                                </div>`
+            },
+            columns: [
+                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                { data: 'name', name: 'name' },
+                { data: 'email', name: 'email', orderable: false, searchable: true },
+                { data: 'role_label', name: 'role', orderable: true, searchable: false },
+                { data: 'set_admin', name: 'set_admin', orderable: false, searchable: false },
+                { data: 'is_active', name: 'is_enabled', orderable: false, searchable: false },
+                { data: 'action', name: 'action', orderable: false, searchable: false },
+            ]
+        });
+
+
+        // --------- Open modals (populate fields) ----------
+        $(document).on('click', '.change_admin_status', function (e) {
             e.preventDefault();
-            $('.modal-busy').show();
+            $('#admin_status_id').val($(this).data('id'));
+            $('#admin_role').val($(this).data('role'));
+            $('#admin_status_title').text($(this).data('title'));
+            $('#admin_status_description').text($(this).data('description'));
+        });
+
+        $(document).on('click', '.change_account_status', function (e) {
+            e.preventDefault();
+            $('#account_status_id').val($(this).data('id'));
+            $('#account_enabled').val($(this).data('enabled'));
+            $('#account_status_title').text($(this).data('title'));
+            $('#account_status_description').text($(this).data('description'));
+        });
+
+        $(document).on('click', '.deletebtn', function (e) {
+            e.preventDefault();
+            $('#delete_id').val($(this).data('id'));
+            $('#delete_type').val($(this).data('type'));
+            $('#deletemodal').modal('show');
+        });
+
+
+        // --------- Submit modals (AJAX) ----------
+
+        // Admin status
+        $('#admin_status_modal_clear').on('submit', function (e) {
+            e.preventDefault();
+            const id = $('#admin_status_id').val();
+            const role = $('#admin_role').val();
+
+            $.ajax({
+                url: '{{ url('/admin/users') }}/' + id + '/role',
+                type: 'PATCH',
+                data: { role: role },
+                success: function (res) {
+                    dt.ajax.reload(null, false);
+                    successModal('SUCCESSFULLY UPDATED');
+
+                },
+                error: function (xhr) {
+                    errorModal();
+                    console.error(xhr.responseText || xhr.statusText);
+                },
+
+
+            });
+        });
+
+        // Enable or Desable accout
+        $('#account_status_modal_clear').on('submit', function (e) {
+            e.preventDefault();
+            const id = $('#account_status_id').val();
+            const isEnabled = $('#account_enabled').val();
+
+            $.ajax({
+                url: '{{ url('/admin/users') }}/' + id + '/account-status',
+                type: 'PATCH',
+                data: { is_enabled: isEnabled },
+                success: function (res) {
+                    dt.ajax.reload(null, false);
+                    successModal('SUCCESSFULLY UPDATED');
+                },
+                error: function (xhr) {
+                    errorModal();
+                    console.error(xhr.responseText || xhr.statusText);
+                }
+            });
+
+
+        });
+
+
+        $('#delete_modal_clear').on('submit', function (e) {
+            e.preventDefault();
             let id = $('#delete_id').val();
-            let type = $('#delete_type').val();
-            $('#delete_modal_clear')[0].reset();
-
-            //Delete Admin Start
-            if (type == "delete_admin") {
-                var url = "{{ route('users.destroy', ':id') }}";
-                url = url.replace(':id', id);
-                $.ajax({
-                    type: "delete",
-                    dataType: "json",
-                    url: url,
-                    success: function(res) {
-                        if (res.status == 'success') {
-                            $('.reloadAdminTable').load(location.href +
-                                ' .reloadAdminTable');
-                            deleteModal();
-                        } else if (res.status == 'error') {
-                            errorModal();
-                        }
-                        $('.modal-busy').hide();
-                    },
-                    error: function(err) {
-                        errorModal();
-                        $('.modal-busy').hide();
-                    }
-                });
-            }
-            //Delete Admin End
-        });
-        //Delete section end
-
-        // Update section start
-        $(document).on('click', '.admin_status', function(e) {
-            e.preventDefault();
-            $('.modal-busy').show();
-            let id = $('#admin_status_id').val();
-            let role;
-            let as_admin = document.getElementById('as_admin');
-
-            role = $('#status').val();
-
-
-            var url = "{{ route('users.update', ':id') }}";
-            url = url.replace(':id', id);
-            $('#admin_status_modal_clear')[0].reset();
             $.ajax({
-                type: "put",
-                dataType: "json",
+                url: '{{ url('/admin/users') }}/' + id,
+                type: 'DELETE',
                 data: {
-                    role: role,
+                    _token: '{{ csrf_token() }}'
                 },
-                url: url,
-                success: function(res) {
-
-                    if (res.status == 'success') {
-                        $('.reloadAdminTable').load(location.href +
-                            ' .reloadAdminTable');
-                        updateModal();
-                    } else if (res.status == 'error') {
-                        errorModal();
-                    }
-                    $('.modal-busy').hide();
+                success: function (res) {
+                    dt.ajax.reload(null, false);
+                    successModal('SUCCESSFULLY DELETED');
                 },
-                error: function(err) {
+                error: function (xhr) {
                     errorModal();
-                    $('.modal-busy').hide();
-
+                    console.error(xhr.responseText || xhr.statusText);
                 }
             });
-
-
         });
-
-        // Update account status (Enable /Disble)
-        $(document).on('click', '.account_status', function(e) {
-            e.preventDefault();
-            $('.modal-busy').show();
-            let id = $('#account_status_id').val();
-            let is_enabled;
-            let as_admin = document.getElementById('as_admin');
-
-            is_enabled = $('#status').val();
-
-
-            var url = "{{ route('accoutStatus', ':id') }}";
-            url = url.replace(':id', id);
-            $('#account_status_modal_clear')[0].reset();
-            $.ajax({
-                type: "put",
-                dataType: "json",
-                data: {
-                    is_enabled: is_enabled,
-                },
-                url: url,
-                success: function(res) {
-                    if (res.status == 'success') {
-                        $('.reloadAdminTable').load(location.href +
-                            ' .reloadAdminTable');
-                        updateModal();
-                    } else if (res.status == 'error') {
-                        errorModal();
-                    }
-                    $('.modal-busy').hide();
-                },
-                error: function(err) {
-                    errorModal();
-                    $('.modal-busy').hide();
-
-                }
-            });
-
-
-        });
-        // Update section end
-
 
 
     });

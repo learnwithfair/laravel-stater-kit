@@ -50,9 +50,9 @@ class ProfileController extends Controller
             $user->email = $request->email;
 
             $user->save();
-            return redirect()->back()->with('t-success', 'Profile updated successfully');
+            return redirect()->back()->with('success', 'Profile updated successfully');
         } catch (Exception) {
-            return redirect()->back()->with('t-error', 'Something went wrong');
+            return redirect()->back()->with('error', 'Something went wrong');
         }
     }
 
@@ -78,12 +78,12 @@ class ProfileController extends Controller
                 $user->password = Hash::make($request->password);
                 $user->save();
 
-                return redirect()->back()->with('t-success', 'Password updated successfully');
+                return redirect()->back()->with('success', 'Password updated successfully');
             } else {
-                return redirect()->back()->with('t-error', 'Current password is incorrect');
+                return redirect()->back()->with('error', 'Current password is incorrect');
             }
         } catch (Exception) {
-            return redirect()->back()->with('t-error', 'Something went wrong');
+            return redirect()->back()->with('error', 'Something went wrong');
         }
     }
 

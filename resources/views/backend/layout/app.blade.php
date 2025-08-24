@@ -47,6 +47,18 @@
     @yield('script')
     @stack('script')
 
+    @if(session('success'))
+        <script>
+            successModal('{{ session("success") }}');
+        </script>
+    @endif
+
+    @if($errors->any())
+        <script>
+            errorModal('{!! implode("<br>", $errors->all()) !!}');
+        </script>
+    @endif
+
     <!-- Custom Spinner Start -->
     @include('backend.layout.modal._spinner')
 

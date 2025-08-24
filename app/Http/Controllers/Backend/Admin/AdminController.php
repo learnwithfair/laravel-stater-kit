@@ -7,49 +7,90 @@ use App\Models\Attendance;
 use App\Models\Employee;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\DataTables;
 
 class AdminController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Users list page (view only).
      */
-
-    public function index()
+    public function index(Request $request)
     {
-        $adminsDetails = User::where('id', '!=', Auth::id())
-            ->orderBy('id', 'desc')
-            ->get();
-        return response(view('backend.admin.index', compact('adminsDetails')));
+        if ($request->ajax()) {
+            $query = User::query()
+                ->select(['id', 'name', 'email', 'role', 'is_enabled'])
+                ->where('id', '!=', Auth::id())
+                ->orderByDesc('id');
+
+            return DataTables::of($query)
+                ->addIndexColumn() // adds DT_RowIndex
+                ->editColumn('email', function (User $u) {
+                    return '<a href="mailto:' . e($u->email) . '" target="_blank">' . e($u->email) . '</a>';
+                })
+                ->addColumn('role_label', function (User $u) {
+                    return $u->role === 'admin'
+                        ? '<span class="text-info">Admin</span>'
+                        : '<span class="text-success">User</span>';
+                })
+                ->addColumn('set_admin', function (User $u) {
+                    $next = $u->role === 'admin' ? 'user' : 'admin';
+                    $checked = $u->role === 'admin' ? 'checked' : '';
+                    return '
+                    <a href="#" class="change_admin_status"
+                       data-id="' . $u->id . '"
+                       data-role="' . $next . '"
+                       data-title="Do you want to set as a ' . ucfirst($next) . '?"
+                       data-description="' . ($next === 'admin' ? 'He will access Dashboard!!' : "He won't access all!!") . '"
+                       data-bs-toggle="modal" data-bs-target="#adminStatusmodal">
+                        <label class="switch">
+                            <input type="checkbox" ' . $checked . '>
+                            <span class="slider round"></span>
+                        </label>
+                    </a>';
+                })
+                ->addColumn('is_active', function (User $u) {
+                    $next = $u->is_enabled ? 0 : 1;
+                    $checked = $u->is_enabled ? 'checked' : '';
+                    return '
+                    <a href="#" class="change_account_status"
+                       data-id="' . $u->id . '"
+                       data-enabled="' . $next . '"
+                       data-title="Do you want to ' . ($next ? 'Enable' : 'Disable') . ' it?"
+                       data-description="' . ($next ? 'He will access Dashboard!!' : "He won't access all!!") . '"
+                       data-bs-toggle="modal" data-bs-target="#accountStatusmodal">
+                        <label class="switch">
+                            <input type="checkbox" ' . $checked . '>
+                            <span class="slider round"></span>
+                        </label>
+                    </a>';
+                })
+                ->addColumn('action', function (User $u) {
+                    return '
+                    <a class="text-danger cursor-pointer deletebtn"
+                       data-id="' . $u->id . '" style="cursor:pointer">
+                        <i class="fas fa-trash-alt fs-5"></i>
+                    </a>';
+                })
+                ->rawColumns(['email', 'role_label', 'set_admin', 'is_active', 'action'])
+                ->make(true);
+        }
+
+        return view('backend.admin.index');
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Register .
      */
     public function store(Request $request)
     {
-
-
         $validated = Validator::make($request->all(), [
             'name'     => 'required|string|min:3',
             'email'    => 'required|email|unique:users',
@@ -62,7 +103,6 @@ class AdminController extends Controller
                 ->withInput();
         }
 
-        // Create the user
         User::create([
             'name'     => $request->name,
             'email'    => $request->email,
@@ -71,99 +111,52 @@ class AdminController extends Controller
 
         return redirect()->route('login')->with('success', 'Registration successful. Please wait for approval!');
     }
-
+    public function show(Request $request) {}
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Update role (admin/user).
      */
-    public function show($id)
+    public function updateRole(Request $request, User $user): JsonResponse
     {
-
-        $adminDetails = User::find($id);
-        if ($adminDetails) {
-            // return response()->json( $adminDetails );
-            return view('backend.hr.policy', compact('adminDetails'));
-        }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $update = User::findOrFail($id)->update([
-            'role' => $request->role,
+        $request->validate([
+            'role' => 'required|in:admin,user',
         ]);
-        if ($update) {
-            return response()->json(['status' => "success"]);
-        } elseif (!$update) {
-            return response()->json(['status' => "error"]);
-        } else {
-            return response()->json($update);
-        }
-    }
 
-    public function accoutStatus(Request $request, $id)
-    {
-        $update = User::findOrFail($id)->update([
-            'is_enabled' => $request->is_enabled,
-        ]);
-        if ($update) {
-            return response()->json(['status' => "success"]);
-        } elseif (!$update) {
-            return response()->json(['status' => "error"]);
-        } else {
-            return response()->json($update);
-        }
+        $updated = $user->update(['role' => $request->string('role')]);
+
+        return response()->json(['status' => $updated ? 'success' : 'error']);
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Update account enabled/disabled.
      */
-    public function destroy($id)
+    public function updateAccountStatus(Request $request, User $user): JsonResponse
+    {
+        $request->validate([
+            'is_enabled' => 'required|boolean',
+        ]);
+
+        $updated = $user->update(['is_enabled' => (bool) $request->input('is_enabled')]);
+
+        return response()->json(['status' => $updated ? 'success' : 'error']);
+    }
+
+
+
+    /**
+     * Delete user.
+     */
+    public function destroy(User $user): JsonResponse
     {
         $path = 'uploads/profileImages/';
-        $data = User::find($id);
-        $oldPicture = $data->image;
-        if ($oldPicture != '') {
-            if (File::exists(public_path($path . $oldPicture))) {
-                File::delete(public_path($path . $oldPicture));
+        if ($user->image) {
+            $full = public_path($path . $user->image);
+            if (File::exists($full)) {
+                File::delete($full);
             }
         }
 
-        $delete = $data->delete();
+        $deleted = $user->delete();
 
-        if ($delete) {
-            return response()->json(['status' => "success"]);
-        } elseif (!$delete) {
-            return response()->json(['status' => "error"]);
-        } else {
-            return response()->json($delete);
-        }
+        return response()->json(['status' => $deleted ? 'success' : 'error']);
     }
-    public function profile()
-    {
-        return view('backend.admin.index', compact('adminDetails', 'messageInfo'));
-    }
-   
 }

@@ -19,7 +19,7 @@
                         does not exist or has been moved.</p>
                 </div>
                 <div class="error_btn  text-center">
-                    <a class=" default_btn theme_bg_6 " href="{{ route('dashboard') }}">
+                    <a class=" default_btn theme_bg_6 " href="{{ route('admin.dashboard') }}">
                         <i class="fas fa-arrow-left"></i> &nbsp;Back Dashboard</a>
                 </div>
             </div>

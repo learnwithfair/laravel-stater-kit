@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-       <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="description" content="EdenProse">
     <meta name="keywords" content="EdenProse, eden prose">
     <meta name="author" content="Rahatul Rabbi, Rahatul, Rabbi, Rahatul-Rabbi, Rahatul_Rabbi, MD RAHATUL RABBI">

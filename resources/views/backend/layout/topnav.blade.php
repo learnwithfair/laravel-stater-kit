@@ -21,26 +21,22 @@
                 </div>
                 <div class="header_right d-flex justify-content-between align-items-center">
                     <div class="header_notification_warp d-flex align-items-center">
-
                         <!-- Full Screen Toggle Button -->
                         <li class="fullscreen-toggle">
                             <a id="fullscreenBtn">
                                 <i class="ti-fullscreen"></i>
                             </a>
                         </li>
-
-
                         <!-- Theme Toggle Button -->
                         <li class="theme-toggle">
                             <a id="themeToggleBtn">
                                 <i class="ti-rss-alt"></i> <!-- Default icon -->
                             </a>
                         </li>
-
-                        <li>
+                        {{-- <li>
                             <a class="bell_notification_clicker nav-link-notify" href="#">
                                 <img src="{{ asset('backend/assets/img/icon/bell.svg') }}" alt="" />
-                                {{-- <span>8</span> --}}
+                                <span>8</span>
                             </a>
                             <!-- Menu_NOtification_Wrap  -->
                             <div class="Menu_NOtification_Wrap">
@@ -135,8 +131,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--/ Menu_NOtification_Wrap  -->
-                        </li>
+                        </li> --}}
                     </div>
                     <div class="profile_info d-flex align-items-center">
                         <div class="profile_thumb mr_20">

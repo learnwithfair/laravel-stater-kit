@@ -1,54 +1,24 @@
-<div class="modal fade bd-example-modal-sm" id="accountStatusmodal" tabindex="-1" role="dialog"
-    aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-sm" id="accountStatusmodal" tabindex="-1" role="dialog" aria-labelledby="accountStatusLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
         <div class="modal-content modal_icon">
             <form action="" method="post" id="account_status_modal_clear">
                 @csrf
-                <div class="modal-title" id="exampleModalLongTitle">
+                <div class="modal-title">
                     <input type="hidden" name="account_status_id" id="account_status_id">
-                    <input type="hidden" name="status" id="status">
-                    <div align="middle">
-                        <img src="{{ asset('backend/assets/icon/warning.png') }}" style="border-radius:unset;"
-                            alt="">
+                    <input type="hidden" name="account_enabled" id="account_enabled">
+                    <div class="text-center">
+                        <img src="{{ asset('backend/assets/icon/warning.png') }}" class="img-fluid" alt="Warning">
                     </div>
                     <br>
                     <h5 id="account_status_title"></h5>
-                    <div></div>
-                    <div id="account_status_description"></div>
+                    <p id="account_status_description"></p>
                 </div>
                 <br>
-                <div>
-                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"
-                        style="margin:0px 10px">No&nbsp;</button>
-                    <button type="submit" class="btn btn-danger account_status btn-sm" data-dismiss="modal"
-                        style="margin:0px 10px">Yes</button>
+                <div class="text-center">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal" style="margin:0 10px">No</button>
+                    <button type="submit" class="btn btn-danger account_status btn-sm" data-bs-dismiss="modal" style="margin:0 10px">Yes</button>
                 </div>
             </form>
-
         </div>
     </div>
 </div>
-{{-- For detele Confirm Modal  --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $(document).on('click', '.change_account_status', function(e) {
-            e.preventDefault();
-            let id = $(this).data('id');
-            let status = $(this).data('status');
-            let title = $(this).data('title');
-            let description = $(this).data('description');
-            if (status == 0) {
-                $('#admin-area').hide();
-            } else {
-                $('#admin-area').show();
-            }
-            $('#account_status_id').val(id);
-            $('#status').val(status);
-            $('#account_status_title').text(title);
-            $('#account_status_description').text(description);
-
-        });
-    });
-</script>

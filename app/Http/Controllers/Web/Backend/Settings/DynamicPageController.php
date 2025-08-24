@@ -23,48 +23,56 @@ class DynamicPageController extends Controller
      * @return View|JsonResponse
      * @throws Exception
      */
-    public function index(Request $request): View | JsonResponse
+    public function index(Request $request): View|JsonResponse
     {
         if ($request->ajax()) {
-            $query = DynamicPage::query()->latest(); // Use query() instead of get()
-
-            if (!empty($request->input('search.value'))) {
-                $searchTerm = $request->input('search.value');
-                $query->where('page_title', 'LIKE', "%$searchTerm%");
-            }
+            $query = DynamicPage::latest();
 
             return DataTables::of($query)
                 ->addIndexColumn()
-                ->addColumn('page_content', function ($data) {
-                    $page_content       = $data->page_content;
-                    $short_page_content = strlen($page_content) > 100 ? substr($page_content, 0, 100) . '...' : $page_content;
-                    return '<p>' . $short_page_content . '</p>';
+                ->editColumn('page_content', function (DynamicPage $page) {
+                    return e(Str::limit(strip_tags($page->page_content), 100));
                 })
-                ->addColumn('status', function ($data) {
-                    $status = ' <div class="form-check form-switch form-switch-lg">';
-                    $status .= ' <input onclick="showStatusChangeAlert(' . $data->id . ')" type="checkbox" class="form-check-input" id="customSwitch' . $data->id . '" getAreaid="' . $data->id . '" name="status"';
-                    if ($data->status == "active") {
-                        $status .= "checked";
-                    }
-                    $status .= '><label for="customSwitch' . $data->id . '" class="form-check-label" for="customSwitch"></label></div>';
-                    return $status;
+                ->addColumn('status', function (DynamicPage $page) {
+                    $checked = $page->status === 'active' ? 'checked' : '';
+                    return '
+                    <a href="#" class="change_status"
+                       data-id="' . $page->id . '"
+                       data-status="' . ($page->status === 'active' ? 'inactive' : 'active') . '"
+                       data-title="Do you want to ' . ($page->status === 'active' ? 'Deactivate' : 'Activate') . ' it?"
+                       data-description="This will change the page visibility."
+                       data-bs-toggle="modal" data-bs-target="#statusModal">
+                        <label class="switch">
+                            <input type="checkbox" ' . $checked . '>
+                            <span class="slider round"></span>
+                        </label>
+                    </a>';
                 })
-                ->addColumn('action', function ($data) {
-                    return '<div class="btn-group btn-group-md" role="group" aria-label="Basic example">
-                          <a href="' . route('dynamic_page.edit', ['id' => $data->id]) . '" class="text-white btn btn-primary btn-xl" title="Edit">
-                            Edit
-                          </a>
-                          <a href="#" onclick="showDeleteConfirm(' . $data->id . ')" class="text-white btn btn-danger btn-xl" title="Delete">
-                            Delete
-                          </a>
+                ->addColumn('action', function (DynamicPage $page) {
+                    return '
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="' . route('dynamic_page.show', $page->id) . '" 
+                            class="text-info" title="View">
+                                <i class="fas fa-eye fs-5"></i>
+                            </a>
+                            <a href="' . route('dynamic_page.edit', $page->id) . '" 
+                            class="text-warning" title="Edit">
+                                <i class="fas fa-edit fs-5"></i>
+                            </a>
+                            <a href="#" 
+                            class="text-danger deletebtn" data-id="' . $page->id . '" title="Delete">
+                                <i class="fas fa-trash-alt fs-5"></i>
+                            </a>
                         </div>';
                 })
+
                 ->rawColumns(['page_content', 'status', 'action'])
                 ->make(true);
         }
 
         return view('backend.settings.dynamic_page.index');
     }
+
 
 
     /**
@@ -79,6 +87,22 @@ class DynamicPageController extends Controller
         }
         return redirect()->route('dynamic_page.index');
     }
+
+    /**
+     * Display the specified dynamic page.
+     *
+     * @param int $id
+     * @return View|RedirectResponse
+     */
+    public function show(int $id): View | RedirectResponse
+    {
+        if (User::find(auth()->user()->id)) {
+            $page = DynamicPage::findOrFail($id);
+            return view('backend.settings.dynamic_page.show', compact('page'));
+        }
+        return redirect()->route('dynamic_page.index');
+    }
+
 
     /**
      * Store a newly created dynamic page in the database.
@@ -105,9 +129,9 @@ class DynamicPageController extends Controller
                 $data->page_content = $request->page_content;
                 $data->save();
             }
-            return redirect()->route('dynamic_page.index')->with('t-success', 'Dynamic Page created successfully.');
+            return redirect()->route('dynamic_page.index')->with('success', 'Dynamic Page created successfully.');
         } catch (Exception) {
-            return redirect()->route('dynamic_page.index')->with('t-error', 'Dynamic Page failed created.');
+            return redirect()->route('dynamic_page.index')->with('error', 'Dynamic Page failed created.');
         }
     }
 
@@ -153,10 +177,10 @@ class DynamicPageController extends Controller
                     'page_content' => $request->page_content,
                 ]);
 
-                return redirect()->route('dynamic_page.index')->with('t-success', 'Dynamic Page Updated Successfully.');
+                return redirect()->route('dynamic_page.index')->with('success', 'SUCCESSFULLY UPDATED');
             }
         } catch (Exception) {
-            return redirect()->route('dynamic_page.index')->with('t-error', 'Dynamic Page failed to update');
+            return redirect()->route('dynamic_page.index')->with('error', 'UNSUCCESSFULL!!');
         }
         return redirect()->route('dynamic_page.index');
     }
@@ -202,7 +226,7 @@ class DynamicPageController extends Controller
         $page = DynamicPage::findOrFail($id);
         $page->delete();
         return response()->json([
-            't-success' => true,
+            'success' => true,
             'message'   => 'Deleted successfully.',
         ]);
     }

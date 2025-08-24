@@ -51,9 +51,9 @@ class SocialMediaController extends Controller
 
             SocialMedia::whereIn('id', $idsToUpdate)->delete();
 
-            return back()->with('t-success', 'Social media links updated successfully.');
+            return back()->with('success', 'Social media links updated successfully.');
         } catch (Exception) {
-            return back()->with('t-error', 'Social media links failed update.');
+            return back()->with('error', 'Social media links failed update.');
         }
     }
 
