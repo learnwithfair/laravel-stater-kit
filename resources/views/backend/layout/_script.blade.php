@@ -1,4 +1,5 @@
-{{-- <script src="{{ asset('backend/assets/vendors/js/vendor.bundle.base.js') }}"></script> --}}
+{{--
+<script src="{{ asset('backend/assets/vendors/js/vendor.bundle.base.js') }}"></script> --}}
 
 
 
@@ -12,6 +13,8 @@
 
 <!-- sidebar menu  -->
 <script src="{{ asset('backend/assets/js/metisMenu.js') }}"></script>
+<!-- Theme Light and dark + fullscreen  -->
+<script src="{{ asset('backend/assets/js/theme.js') }}"></script>
 <!-- waypoints js -->
 <script src="{{ asset('backend/assets/vendors/count_up/jquery.waypoints.min.js') }}"></script>
 <!-- waypoints js -->
@@ -63,7 +66,8 @@
 <script src="{{ asset('backend/assets/vendors/apex_chart/apex-chart2.js') }}"></script>
 <script src="{{ asset('backend/assets/vendors/apex_chart/apex_dashboard.js') }}"></script>
 
-{{-- <script src="{{ asset('backend/assets/vendors/echart/echarts.min.js') }}"></script>  --}}
+{{--
+<script src="{{ asset('backend/assets/vendors/echart/echarts.min.js') }}"></script> --}}
 
 <script src="{{ asset('backend/assets/vendors/chart_am/core.js') }}"></script>
 <script src="{{ asset('backend/assets/vendors/chart_am/charts.js') }}"></script>
@@ -78,26 +82,19 @@
 
 
 
-<!-- Start  js for Bootsrap -->
-{{-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-</script> --}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-</script>
+    </script>
 <!-- End  js for Bootsrap -->
 
-{{-- For ajax  --}}
+{{-- For ajax --}}
 @include('backend.ajax.masterAjax')
 <!-- start  js for datatable -->
 <script src=" https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
 <script>
     // Call the dataTables jQuery plugin
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#dataTable').DataTable({
             language: {
                 paginate: {
@@ -117,7 +114,7 @@
 
 {{-- dropify start --}}
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.dropify').dropify();
     });
 </script>

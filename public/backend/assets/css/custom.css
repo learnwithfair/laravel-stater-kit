@@ -131,9 +131,11 @@ th {
     color: #0f1a34 !important;
     font-weight: bolder !important;
 }
+
 td {
     color: #0f1a34 !important;
 }
+
 .page-title {
     color: #0f1a34 !important;
     font-weight: 700 !important;
@@ -143,24 +145,26 @@ td {
     outline: none !important;
     background-color: transparent !important;
 }
+
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     padding: 0.5em 0px !important;
 }
 
-.table-hover > tbody > tr:hover td {
+.table-hover>tbody>tr:hover td {
     color: #0f1a34 !important;
     /* font-weight: bold !important; */
 }
-.table-hover > tbody > tr:hover a {
+
+.table-hover>tbody>tr:hover a {
     font-weight: bold !important;
 }
 
 
 
-.menu-title{
+.menu-title {
     color: white;
     padding-left: 10px;
     text-transform: capitalize;
-   margin-top: 15px;
-   margin-bottom: 5px;
+    margin-top: 15px;
+    margin-bottom: 5px;
 }

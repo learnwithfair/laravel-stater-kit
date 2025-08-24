@@ -40,7 +40,7 @@
             <i class="ti-angle-up"></i>
         </a>
     </div>
-    
+
     @yield('modal')
 
     @include('backend.layout._script')
@@ -49,6 +49,8 @@
 
     <!-- Custom Spinner Start -->
     @include('backend.layout.modal._spinner')
+
+
 </body>
 
 </html>
