@@ -1,4 +1,4 @@
-<x-form-section submit="updateProfileInformation" style="padding:25px 15px;" class="card">
+<x-form-section submit="updateProfileInformation" style="padding:15px 15px;" class="card">
     <x-slot name="title">
         {{ __('Profile Information') }}
     </x-slot>
@@ -18,7 +18,7 @@
         </div>
 
         <!-- Email -->
-        <div class="col-span-6 sm:col-span-4 mt-3">
+        <div class="col-span-6 sm:col-span-4 mt-3 mb-1">
             <x-label for="email" value="{{ __('Email') }}" />
             <x-input id="email" type="email" class="mt-1 block w-full form-control"
                 wire:model.defer="state.email" readOnly/>
@@ -45,7 +45,7 @@
 
     </x-slot>
 
-    <x-slot name="actions">
+    <x-slot name="actions" >
         <x-action-message class="mr-3" on="saved">
             {{ __('Saved.') }}
         </x-action-message>

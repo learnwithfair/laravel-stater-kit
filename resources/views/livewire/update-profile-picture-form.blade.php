@@ -1,4 +1,4 @@
-<x-form-section submit="update_photo" style="padding:25px 15px; margin-top: -30px;" class="card mb-5">
+<x-form-section submit="update_photo" style="padding:25px 15px;" class="card">
     <x-slot name="title">
         {{ __('Update Profile Picture') }}
     </x-slot>

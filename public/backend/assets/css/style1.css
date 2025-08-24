@@ -3838,7 +3838,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child::befor
 
 /* line 226, G:/admin_project/10 admin/cryptocurrency/scss/_header.scss */
 .header_iner .header_right .header_notification_warp li > a img {
-  width: 20px;
+  width: 16px;
 }
 
 /* line 229, G:/admin_project/10 admin/cryptocurrency/scss/_header.scss */
@@ -3885,8 +3885,8 @@ table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child::befor
 
 /* line 265, G:/admin_project/10 admin/cryptocurrency/scss/_header.scss */
 .profile_info img {
-  max-width: 54px;
-  max-height: 54px;
+  max-width: 45px;
+  max-height: 45px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -4738,10 +4738,19 @@ table.dataTable {
   visibility: visible;
 }
 
+
+/* line 352, G:/admin_project/10 admin/cryptocurrency/scss/_sidebar.scss */
+.sidebar #sidebar_menu > li  {
+  color: #8F91AA;
+}
+
 /* line 352, G:/admin_project/10 admin/cryptocurrency/scss/_sidebar.scss */
 .sidebar #sidebar_menu > li > a {
   color: #8F91AA;
+  /* color: red; */
 }
+
+
 
 /* line 357, G:/admin_project/10 admin/cryptocurrency/scss/_sidebar.scss */
 .sidebar #sidebar_menu > li.mm-active > a {
@@ -5263,7 +5272,7 @@ body::-webkit-scrollbar {
   transition: .5s;
   position: relative;
   min-height: 100vh;
-  padding-bottom: 70px;
+  padding-bottom: 40px;
   overflow: hidden;
 }
 
@@ -5328,7 +5337,7 @@ body::-webkit-scrollbar {
   margin: 0;
   z-index: 22;
   border-radius: 0px;
-  padding: 30px 30px;
+  padding: 20px 30px;
 }
 
 /* line 54, G:/admin_project/10 admin/cryptocurrency/scss/_main_content.scss */
@@ -6372,16 +6381,15 @@ body::-webkit-scrollbar {
 /************** footer css ****************/
 /* line 2, G:/admin_project/10 admin/cryptocurrency/scss/_footer.scss */
 .footer_part {
-  text-align: center;
-  padding-bottom: 0px;
-  padding-top: 6px;
+  text-align: center;  
+  padding-top: 0px;
   background: transparent;
   padding-left: 270px;
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0px;
-  padding-bottom: 15px;
+  padding-bottom: 5px;
 }
 
 /* line 15, G:/admin_project/10 admin/cryptocurrency/scss/_footer.scss */
@@ -6431,7 +6439,7 @@ body::-webkit-scrollbar {
 /* line 44, G:/admin_project/10 admin/cryptocurrency/scss/_footer.scss */
 .footer_part .footer_iner.text-center {
   background: #FFFFFF;
-  padding: 27px 0;
+  padding: 10px 0;
   margin: 0 15px;
   border-radius: 15px;
   background: transparent;
