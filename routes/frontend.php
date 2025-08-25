@@ -14,5 +14,5 @@ Route::get('/storage', [ResetController::class, 'storage'])->name('storage');
 //! Route for Landing Page_______________________________________________________
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-//Dynamic Page_______________________________________________________
+//! Dynamic Page_______________________________________________________
 Route::get('/page/privacy-and-policy', [PageController::class, 'privacyAndPolicy'])->name('dynamicPage.privacyAndPolicy');

@@ -2,130 +2,44 @@
 
 namespace App\Http\Controllers\Web\Backend\Settings;
 
-use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\UserDetail;
-use Exception;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\File;
+
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the profile settings page.
-     *
-     * @return View
-     */
-    public function showProfile()
+    public function updatePicture(Request $request)
     {
-        $userDetails = User::where('id', Auth::id())->first();
-        return view('backend.layouts.settings.profile_settings', ['userDetails' => $userDetails]);
-    }
 
-    /**
-     * Update the user's profile information.
-     *
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function UpdateProfile(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name'  => 'nullable|max:100|min:2',
-            'email' => 'nullable|email|unique:users,email,' . auth()->user()->id,
-        ]);
+        $path = 'uploads/profileImages/';
+        $file = $request->file('admin_image');
+        $new_name = 'admin_' . date('Ymd') . uniqid() . '.jpg';
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-        try {
-            $user        = User::find(auth()->user()->id);
-            $user->name  = $request->name;
-            $user->email = $request->email;
+        //Upload new image
+        $upload = $file->move(public_path($path), $new_name);
 
-            $user->save();
-            return redirect()->back()->with('success', 'Profile updated successfully');
-        } catch (Exception) {
-            return redirect()->back()->with('error', 'Something went wrong');
-        }
-    }
+        if (!$upload) {
+            return response()->json(['status' => 0, 'msg' => 'Something went wrong, upload new picture failed.']);
+        } else {
+            //Get Old picture
 
-    /**
-     * Update the user's password.
-     *
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function UpdatePassword(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'old_password' => 'required',
-            'password'     => 'required|confirmed|min:8',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-        try {
-            $user = Auth::user();
-            if (Hash::check($request->old_password, $user->password)) {
-                $user->password = Hash::make($request->password);
-                $user->save();
-
-                return redirect()->back()->with('success', 'Password updated successfully');
-            } else {
-                return redirect()->back()->with('error', 'Current password is incorrect');
-            }
-        } catch (Exception) {
-            return redirect()->back()->with('error', 'Something went wrong');
-        }
-    }
-
-    /**
-     * Update the user's profile picture.
-     *
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function UpdateProfilePicture(Request $request)
-    {
-        try {
-            $request->validate([
-                'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg|max:4048',
-            ]);
-
-            $user        = Auth::user();
-
-            if ($user->avatar) {
-                $previousImagePath = public_path($user->avatar);
-                if (file_exists($previousImagePath)) {
-                    unlink($previousImagePath);
+            $oldPicture = Auth::user()->image;
+            if ($oldPicture != '') {
+                if (File::exists(public_path($path . $oldPicture))) {
+                    File::delete(public_path($path . $oldPicture));
                 }
             }
 
-            if ($request->hasFile('profile_picture')) {
-                $image                        = $request->file('profile_picture');
-                $imageName                    = uploadImage($image, 'users');
-                $user->avatar = $imageName;
+            $update = User::find(Auth::user()->id)->update(['image' => $new_name]);
 
-                $user->save();
+            if (!$update) {
+                return response()->json(['status' => 0, 'msg' => 'Something went wrong, updating picture in db failed.']);
+            } else {
+                return response()->json(['status' => 1, 'msg' => 'Your profile picture has been updated successfully']);
             }
-
-            return response()->json([
-                'success'   => true,
-                'image_url' => asset($user->avatar),
-            ]);
-        } catch (Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'An error occurred while uploading the profile picture.',
-            ]);
         }
     }
 }

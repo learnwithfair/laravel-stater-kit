@@ -70,7 +70,7 @@ class DynamicPageController extends Controller
                 ->make(true);
         }
 
-        return view('backend.settings.dynamic_page.index');
+        return view('backend.layouts.settings.dynamic_page.index');
     }
 
 
@@ -98,7 +98,7 @@ class DynamicPageController extends Controller
     {
         if (User::find(auth()->user()->id)) {
             $page = DynamicPage::findOrFail($id);
-            return view('backend.settings.dynamic_page.show', compact('page'));
+            return view('backend.layouts.settings.dynamic_page.show', compact('page'));
         }
         return redirect()->route('dynamic_page.index');
     }
@@ -145,7 +145,7 @@ class DynamicPageController extends Controller
     {
         if (User::find(auth()->user()->id)) {
             $data = DynamicPage::find($id);
-            return view('backend.settings.dynamic_page.edit', compact('data'));
+            return view('backend..layouts.settings.dynamic_page.edit', compact('data'));
         }
         return redirect()->route('dynamic_page.index');
     }

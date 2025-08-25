@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\Backend\Admin\AdminController;
-use App\Http\Controllers\Backend\BackendController;
+
 use App\Http\Controllers\Web\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Web\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Web\Auth\EmailVerificationNotificationController;
@@ -11,6 +10,8 @@ use App\Http\Controllers\Web\Auth\PasswordController;
 use App\Http\Controllers\Web\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Web\Auth\RegisteredUserController;
 use App\Http\Controllers\Web\Auth\VerifyEmailController;
+use App\Http\Controllers\Web\Backend\Settings\ProfileController;
+use App\Http\Controllers\Web\Backend\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     // Admin Register ____________________________________________________________
-    Route::post('/users-register', [AdminController::class, 'store'])->name('admin.store');
+    Route::post('/users-register', [UserController::class, 'store'])->name('admin.store');
 
     // User Register ____________________________________________________________
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -71,5 +72,6 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
 });
 
+
 // Admin Profile Picture ____________________________________________________________
-Route::post('/admin/picture/update', [BackendController::class, 'updatePicture'])->name('adminPictureUpdate');
+Route::post('/admin/picture/update', [ProfileController::class, 'updatePicture'])->name('adminPictureUpdate');

@@ -22,7 +22,7 @@ class SystemSettingController extends Controller
     {
 
         $setting = SystemSetting::latest('id')->first();
-        return view('backend.settings.system_settings', compact('setting'));
+        return view('backend.layouts.settings.system_settings', compact('setting'));
     }
 
     /**

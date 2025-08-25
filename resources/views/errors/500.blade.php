@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    @include('backend.layout._style')
+    @include('backend.partials._style')
 </head>
 
 <body>

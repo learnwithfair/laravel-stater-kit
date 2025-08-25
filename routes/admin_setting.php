@@ -13,15 +13,11 @@ use App\Http\Controllers\Web\Backend\Settings\SystemSettingController;
 // |--------------------------------------------------------------------------
 
 
-//! This route is for updating the user's profile_______________________________________________________
+// Admin Profile Picture ____________________________________________________________
 Route::controller(ProfileController::class)->group(function () {
-    Route::post('/update-profile-picture', 'UpdateProfilePicture')->name('update.profile.picture');
-    Route::post('/update-profile-password', 'UpdatePassword')->name('update.Password');
-
-    //! Route for ProfileController_______________________________________________________
-    Route::get('/profile', 'showProfile')->name('profile.setting');
-    Route::post('/update-profile', 'UpdateProfile')->name('update.profile');
+    // => Route inject into vendor\laravel\jetstream\routes\livewire.php
 });
+
 
 //! Route for SystemSettingController_______________________________________________________
 Route::controller(SystemSettingController::class)->group(function () {
@@ -52,6 +48,3 @@ Route::controller(DynamicPageController::class)->group(function () {
     Route::get('/dynamic-page/{id}', 'show')->name('dynamic_page.show');
     Route::delete('/dynamic-page/{id}', 'destroy')->name('dynamic_page.destroy');
 });
-
-
-

@@ -36,11 +36,8 @@
     }
 </script>
 
-{{-- For User Response --}}
-@include('backend.layout.modal._toast_modal')
-@include('backend.layout.modal._loaded_modal')
-{{-- For SearchBar --}}
-@include('backend.ajax._searchbar')
+@include('modal._toast_modal')
+@include('modal._loaded_modal')
 
 
 <script>

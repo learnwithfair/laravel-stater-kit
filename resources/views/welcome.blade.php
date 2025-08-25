@@ -139,7 +139,7 @@
     <div class="Box">
         <h1 class="text-6xl font-bold text-white">Welcome to Softvence</h1>
         <p class="mt-4 text-white text-md">
-            Use your login credential to access your dashboard.❤️
+            Use your login credential to access your dashboard.
         </p>
     </div>
     <div>

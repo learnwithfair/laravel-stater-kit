@@ -14,7 +14,7 @@ class SocialMediaController extends Controller
     public function index()
     {
         $social_link = SocialMedia::latest('id')->get();
-        return view('backend.settings.social_media', compact('social_link'));
+        return view('backend.layouts.settings.social_media', compact('social_link'));
     }
 
     public function update(Request $request)
