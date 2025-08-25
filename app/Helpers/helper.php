@@ -3,6 +3,9 @@
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
+
 
 // Nav menu active color
 function menuActive($routeName)
@@ -111,27 +114,30 @@ function updateAndRespond(string $modelClass, array $data, $id, ?string $fileFie
  * @param string|null $fileField Optional file field to delete from public folder.
  * @return JsonResponse
  */
-function deleteById(string $modelClass, $id, ?string $fileField = null, string $key = 'id',): JsonResponse
+function deleteById(string $modelClass, $id, ?string $fileField = null, string $key = 'id'): JsonResponse
 {
     try {
         $model = $modelClass::where($key, $id)->first();
 
-        if (! $model) {
-            return buildResponse('error', 'Record not found', 404);
+        if (!$model) {
+            return buildResponse('error', null, 'Record not found', 404);
         }
 
-        // Delete file if field and file exist
-        if ($fileField && $model->$fileField && File::exists(public_path($model->$fileField))) {
-            File::delete(public_path($model->$fileField));
+        // Delete file if present
+        if ($fileField) {
+            deleteFile($model->$fileField);
         }
 
         $deleted = $model->delete();
 
-        return $deleted ? buildResponse('success') : buildResponse('error', null, 'Unable to delete record', 500);
+        return $deleted
+            ? buildResponse('success', null, 'Record deleted successfully')
+            : buildResponse('error', null, 'Unable to delete record', 500);
     } catch (Exception $e) {
         return buildResponse('error', null, $e->getMessage(), 500);
     }
 }
+
 
 /**
  * Send a custom JSON response using standard structure.
@@ -175,4 +181,59 @@ function uploadFile(UploadedFile $file, string $folder, ?string $customName = nu
 
         return null;
     }
+}
+
+
+/**
+ * Delete a file from the public path or storage path.
+ *
+ * @param string|null $filePath Path to the file (relative to public/ or storage/)
+ * @param bool $isPublic Whether the path is from the public folder (default: true)
+ * @return bool True if deleted, false otherwise
+ */
+function deleteFile(?string $filePath, bool $isPublic = true): bool
+{
+    if (!$filePath) {
+        return false;
+    }
+
+    try {
+        $fullPath = $isPublic ? public_path($filePath) : storage_path($filePath);
+
+        if (File::exists($fullPath)) {
+            File::delete($fullPath);
+            Log::info(message: "File deleted: {$fullPath}");
+            return true;
+        }
+    } catch (\Exception $e) {
+        Log::error("File deletion failed: {$filePath} - " . $e->getMessage());
+    }
+
+    return false;
+}
+
+
+
+
+/**
+ * Upload to Public Folder
+ * Upload an image and return its URL.
+ *
+ * @param  \Illuminate\Http\UploadedFile  $image
+ * @param  string  $directory
+ * @return string
+ */
+function uploadImage($file, $folder)
+{
+    if (!$file->isValid()) {
+        return null;
+    }
+
+    $imageName = Str::slug(time()) . rand() . '.' . $file->extension();
+    $path      = public_path('uploads/' . $folder);
+    if (!file_exists($path)) {
+        mkdir($path, 0755, true);
+    }
+    $file->move($path, $imageName);
+    return 'uploads/' . $folder . '/' . $imageName;
 }

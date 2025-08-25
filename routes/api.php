@@ -1,17 +1,28 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-// User Register --------------------------------------------------------------------------
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login',    [AuthController::class, 'login']);
+// Users Auth --------------------------------------------------------------------------
+Route::controller(AuthController::class)->group(function () {
+    Route::post('/register',  'register');
+    Route::post('/login',     'login');
+    Route::post('/resend-otp',  'resendOtp');
+    Route::post('/verify-otp',  'verifyRegisterOtp');
+    Route::post('/forgot-password',  'forgotPassword');
+    Route::post('/reset-password',  'resetPassword');
+});
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/me',        [AuthController::class, 'me']);
-    Route::post('/logout',   [AuthController::class, 'logout']);
-    Route::post('/logout-all', [AuthController::class, 'logoutAll']);
 
-    // Example protected route(s) go here...
+// Users Controller --------------------------------------------------------------------------
+Route::middleware('auth:sanctum')->controller(AuthController::class)->group(function () {
+    Route::get('/users',  'index');
+    Route::get('/users/{user}',  'show');
+    Route::delete('/users',  'destroy');
+    Route::post('/change-password',  'changePassword');
+    Route::post('/update-profile',  'updateProfile');
+
+    Route::get('/me',         'me');
+    Route::post('/logout',    'logout');
+    Route::post('/logout-all',  'logoutAll');
 });

@@ -75,16 +75,7 @@ return [
             'driver' => 'eloquent',
             'model'  => env( 'AUTH_MODEL', App\Models\User::class ),
         ],
-
-        'clients'   => [
-            'driver' => 'eloquent',
-            'model'  => App\Models\Client::class,
-        ],
-
-        'employees' => [ // Add this provider
-            'driver' => 'eloquent',
-            'model'  => App\Models\Employee::class,
-        ],
+        
 
         // 'users' => [
         //     'driver' => 'database',

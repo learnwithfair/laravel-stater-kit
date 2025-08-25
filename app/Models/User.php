@@ -59,7 +59,6 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password'          => 'hashed',
             'agree_to_terms' => 'boolean',
-            'is_premium' => 'boolean',
             'id' => 'integer',
         ];
     }

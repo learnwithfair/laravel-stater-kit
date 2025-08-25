@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->rememberToken();
             $table->string('image')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
-            $table->boolean('is_enabled')->default(false);
+            $table->boolean('is_enabled')->default(true);
             $table->timestamps();
         });
 
