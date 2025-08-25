@@ -133,14 +133,14 @@ Visit **[http://127.0.0.1:8000](http://127.0.0.1:8000)**
 
 ### Admin Panel
 
-* **URL**: `http://127.0.0.1:8000/admin`
-* **Email**: `admin@admin.com`
+* **URL**: `http://127.0.0.1:8000/admin/dashboard`
+* **Email**: `admin@gmail.com`
 * **Password**: `12345678`
 
 ### User Panel
 
 * **URL**: `http://127.0.0.1:8000`
-* **Email**: `user@user.com`
+* **Email**: `user@gmail.com`
 * **Password**: `12345678`
 
 ---
