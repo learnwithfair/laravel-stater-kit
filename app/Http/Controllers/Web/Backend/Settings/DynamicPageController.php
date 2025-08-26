@@ -83,7 +83,7 @@ class DynamicPageController extends Controller
     public function create(): View | RedirectResponse
     {
         if (User::find(auth()->user()->id)) {
-            return view('backend.settings.dynamic_page.create');
+            return view('backend.layouts.settings.dynamic_page.create');
         }
         return redirect()->route('dynamic_page.index');
     }
